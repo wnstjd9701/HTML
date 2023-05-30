@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+
+body {
+    font-family: 'Prompt', sans-serif;
+    font-size: 15px;
+}
+
+#homePageWrap {
+    height: 10%;
+}
+
+#home-page {
+    text-align: center;
+    height: 50px;
+}
+
+#homePageWrap {
+    text-align: center;
+}
+
+a:link,
+a:visited {
+    color: pink;
+    text-decoration-line: none;
+}
+
+.headerWrap {
+    outline: 1px dotted pink;
+}
+
+#menuWrap #categoryWrap {
+    height: 60px;
+}
+
+.category-date {
+    width: 15%;
+    list-style: none;
+    outline: 2px solid pink;
+}
+
+.menu-list {
+    list-style: none;
+    text-align: center;
+    margin-right: 5%;
+    margin-bottom: 20px;
+    height: 60px;
+}
+
+.menu-item {
+    text-align: center;
+    width: 15%;
+    outline: 2px solid pink;
+    border-radius: 40px;
+    float: left;
+    margin-left: 5%;
+}
+
+.contentWrap {
+    position: relative;
+    width: 28%;
+    height: 30%;
+    float: left;
+    margin: 5% 0 3% 3%;
+    border: 1px solid blueviolet;
+    text-align: center;
+    padding-top: 3%;
+}
+
+.content-image{
+    position: absolute;
+    width: 50%;
+    z-index: -1;
+    border: 2px solid red;
+    left: 10%;
+    top: -10%;
+}
+.contents{
+    position: absolute;
+    width:300px;
+    height: 300px;
+}
+.image-text{
+    position: absolute;
+    z-index: 1;
+    border: 2px solid blue;
+    padding-left:15%;
+    left:10%;
+    top: -10%;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dongle&display=swap');
+
+        body {
+            font-family: 'Dongle', sans-serif;
+        }
+        .side-bar{
+            text-decoration-line: none;
+        }
+    </style>
+    <link href="./CSS/login.css" rel="stylesheet">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>로그인 페이지</legend>
+        <form action="#">
+            <input class=user-check name="user-type" type="radio">사용자
+            <input class=user-check name="user-type" type="radio">관리자
+            <ul>
+                <li>
+                    <label for="user-id">ID </label><input id=user-id type="text">
+                </li>
+                <li>
+                    <label for="passowrd">PWD </label><input id=password type="password">
+                </li>
+            </ul>
+            <input class="login-submit" type="submit" value="로그인">
+        </form>
+    </fieldset>
+</body>
+
+</html>
