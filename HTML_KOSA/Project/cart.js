@@ -32,6 +32,10 @@ const minusAmount = (event) => {
     }
     else {
         amount.innerHTML = parseInt(amount.innerHTML) - 1;
+        if (amount.innerHTML == 0) {
+            checkBox[productId - 1].checked = false;
+            checkSelectAll();
+        }
         // 총 금액 변경
         totalPriceCalculate();
     }
