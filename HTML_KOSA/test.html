@@ -1,90 +1,191 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        html * {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #262626;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	font-family: sans-serif;
+	padding: 5rem;
+}
+
+details {
+	position: relative;
+	width: 300px;
+	margin-right: 1rem;
+}
+
+details[open] {
+	z-index: 1;
+}
+
+summary {
+	padding: 1rem;
+	cursor: pointer;
+	border-radius: 5px;
+	background-color: #ddd;
+	list-style: none;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+details[open] summary:before {
+	content: '';
+	display: block;
+	width: 100vw;
+	height: 100vh;
+	background: transparent;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+summary:after {
+	content: '';
+	display: inline-block;
+	float: right;
+	width: .5rem;
+	height: .5rem;
+	border-bottom: 1px solid currentColor;
+	border-left: 1px solid currentColor;
+	border-bottom-left-radius: 2px;
+	transform: rotate(45deg) translate(50%, 0%);
+	transform-origin: center center;
+	transition: transform ease-in-out 100ms
+}
+
+summary:focus {
+	outline: none;
+}
+
+details[open] summary:after {
+	transform: rotate(-45deg) translate(0%, 0%);
+}
+
+ul {
+	width: 100%;
+	background: #ddd;
+	position: absolute;
+	top: calc(100% + .5rem);
+	left: 0;
+	padding: 1rem;
+	margin: 0;
+	box-sizing: border-box;
+	border-radius: 5px;
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+li {
+	margin: 0;
+	padding: 1rem 0;
+	border-bottom: 1px solid #ccc;
+    list-style: none;
+}
+
+li:first-child {
+	padding-top: 0;
+}
+
+li:last-child {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+/* FAKE SELECT */
+
+summary.radios {
+	counter-reset: radios;
+}
+
+summary.radios:before {
+	content: var(--selection);
+}
+
+input[type=radio] {
+	counter-increment: radios;
+	appearance: none;
+	display: none;
+}
+
+input[type=radio]:checked {
+	display: inline;
+	--display: block;
+}
+
+input[type=radio]:after {
+	content: attr(title);
+	display: inline;
+	font-size: 1rem;
+}
+
+ul.list {
+	counter-reset: labels;
+}
+
+label {
+	width: 100%;
+	display: flex;
+	cursor: pointer;
+	justify-content: space-between;
+}
+
+label span {
+	--display: none;
+	display: var(--display);
+	width: 1rem;
+	height: 1rem;
+	border: 1px solid #727272;
+	border-radius: 3px;
+}
+    </style>
 </head>
-
 <body>
-    <header>
-        <div id="logo">
-            <a href="#">
-                <h1>Dream Jeju</h1>
-            </a>
-        </div>
-        <nav>
-            <ul id="topMenu">
-                <li><a href="#">단체 여행</a></li>
-                <li><a href="#">맞춤 여행</a></li>
-                <li><a href="#">갤러리</a></li>
-                <li><a href="#">문의하기</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main class="contents">
-        <section id="headling">
-            <h2>몸과 마음이 치유되는 섬</h2>
-            <span>...</span>
-        </section>
-        <section id="activity">
-            <h2>다양한 액티비티가 기다리는 섬</h2>
-            <span>...</span>
-        </section>
-        <p>
-            <abbr title="Internet of Things">IOT</abbr><br>
-        <p>내가 경험한 가장 흥미진진한 일은 누군가를 만나는 일이다, <cite>'비포선셋'</cite> 중</p>
-        <p>가격: 13000원 <small>(부가세별도)</small></p>
-        <p>물의 화학식은 H<sub>2</sub>0 입니다.</p>
-        <p>E = mc<sup>2</sup></p>
-        <p><s>34000원</s> 19000원</p>
-        <u>텍스트에 단순히 밑줄 긋기</u><br>
-        <ins>새로운 내용 삽입</ins><br>
-        <del>기존 내용 삭제</del><br>
-        <code>function setValue()</code>
-        </p>
-    </main>
-    <table border="1">
-        <caption>상품 구성</caption>
-        <colgroup>
-            <col style="background-color: #eee;">
-            <col>
-            <col span="2" , style="width:100px">
-        </colgroup>
-        <thead>
-            <th>용도</th>
-            <th>중량</th>
-            <th>개수</th>
-            <th>가격</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td rowspan="2">선물용</td>
-                <td>3kg</td>
-                <td>11-16</td>
-                <td>35,000</td>
-            </tr>
-            <tr>
-                <td>5kg</td>
-                <td>18-26</td>
-                <td>52,000</td>
-            </tr>
-            <tr>
-                <td rowspan="2">가정용</td>
-                <td>3kg</td>
-                <td>11-16</td>
-                <td>30,000</td>
-            </tr>
-            <tr>
-                <td>4kg</td>
-                <td>18-26</td>
-                <td>47,000</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <p><a href="www.naver.com" target="_blank">네이버</a></p>
-    </div>
+    
+<details class="custom-select">
+	<summary class="radios">
+		<input type="radio" name="item" id="default" title="Auswählen..." checked>
+		<input type="radio" name="item" id="item1" title="Item 1">
+		<input type="radio" name="item" id="item2" title="Item 2">
+		<input type="radio" name="item" id="item3" title="Item 3">
+		<input type="radio" name="item" id="item4" title="Item 4">
+		<input type="radio" name="item" id="item5" title="Item 5">
+	</summary>
+	<ul class="list">
+		<li>
+			<label for="item1">
+				Item 1
+				<span></span>
+			</label>
+		</li>
+		<li>
+			<label for="item2">Item 2</label>
+		</li>
+		<li>
+			<label for="item3">Item 3</label>
+		</li>
+		<li>
+			<label for="item4">Item 4</label>
+		</li>
+		<li>
+			<label for="item5">Item 5</label>
+		</li>
+	</ul>
+</details>
 </body>
-
 </html>

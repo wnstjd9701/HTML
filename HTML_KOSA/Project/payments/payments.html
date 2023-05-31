@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./payments.css">
+    <script src="./payments.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <header id="logo">
+            logo
+        </header>
+        <div id="payments">결제 페이지</div>
+        <form action="" class="information">
+            <fieldset>
+                <legend>상품 정보</legend>
+                <div class="grid_container">
+                    <div class="product_info">
+                        <img class="product_image" src="../Image/assets/atomheartmother.png" alt="">
+                        <div class="product_content">
+                            <p>a</p>
+                            <p>b</p>
+                        </div>
+                    </div>
+                    <div class="product_info">b</div>
+                    <div class="product_info">c</div>
+                    <div class="product_info">d</div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>주문 정보</legend>
+                <ul class="ul_order_info">
+                    <li>
+                        <label for="user_name" class="user_info">이름</label>
+                        <input type="text" id="user_name" placeholder="여백없이 입력" required>
+                    </li>
+                    <li>
+                        <label for="phone_number" class="user_info">전화번호</label>
+                        <input type="text" id="phone_number" placeholder="전화번호" required>
+                    </li>
+                    <li>
+                        <label for="send_user_name">수령인</label>
+                        <input type="text" id="send_user_name" placeholder="받는 사람 이름" required>
+                    </li>
+                    <li>
+                        <div id="payment_method" class="payment_method">결제 방법</div>
+                        <ul id="payment_type_list" class="payment_type_list">
+                            <li>
+                                <button id="kakao_pay" class="payment_type">카카오 페이</button>
+                            </li>
+                            <li>
+                                <button id="samsung_pay" class="payment_type">삼성 페이</button>
+                            </li>
+                            <li>
+                                <button id="credit_cart" class="payment_type">신용카드 결제</button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+</html>

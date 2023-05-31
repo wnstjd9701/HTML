@@ -1,0 +1,54 @@
+body{
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+}
+fieldset{
+    border: 1px solid pink;
+}
+legend{
+    text-align: center;
+}
+#container{
+    position: relative;
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+}
+header{
+    position: absolute;
+    margin: 0 auto;
+    height: 10%;
+    width: 100%;
+}
+#payments{
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    top: 10%
+}
+.information{
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    top: 20%;
+}
+.grid_container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px 20px;
+    height: 200px;
+}
+.product_image{
+    width:100px;
+    height:100px;
+}
+.product_info{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid blue;
+}
+.product_content{
+}
