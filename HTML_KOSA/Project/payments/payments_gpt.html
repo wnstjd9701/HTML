@@ -4,36 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./payments.css">
-    <script src="./payments.js"></script>
     <title>Payments</title>
-    <style>
-        input {
-            height: 40px;
-            vertical-align: middle;
-            border: 1px solid #dadada;
-            padding: 0px 15px;
-        }
-    </style>
+    <script src="./payments.js"></script>
+    <link rel="stylesheet" href="./payments.css">
+    <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
 </head>
 
 <body>
     <div id="container">
-        <span id="myElement"></span>
-        <!-- The script itself, loaded AFTER your root element. -->
-        <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
-        <script>
-            new TypeIt('#myElement', {
-                strings: "My Project!"
-            }).go();
-        </script>
-
         <div class="logo">
-            logo
+            Logo
         </div>
         <div class="top_name">
-            결제 페이지
         </div>
+        <p id="simpleUsage"></p>
+        <script>
+            new TypeIt(".top_name", {
+  strings: "결제 페이지",
+  speed: 200,
+  waitUntilVisible: true,
+}).go();
+        </script>
         <div class="wrap_product_info">
             <div class="product_info_main">
                 결제 상품
@@ -118,7 +109,6 @@
                 </div>
             </div>
         </div>
-        <p id="simpleUsage"></p>
         <div class="wrap_order_info">
             <div class="order_info">주문 정보</div>
             <div class="user_order_info">
@@ -126,8 +116,9 @@
                     <li>
                         <div class="order_info_box">주소</div>
                         <p class="address_box">
-                            <input type="text" id="zip-code" placeholder="우편번호">
+                            <input type="text" id="zip-code" class="address_input_box" placeholder="우편번호">
                             <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+                            <div></div>
                             <input type="text" id="address-1" class="address_input_box" placeholder="도로명주소">
                             <input type="text" id="address-2" class="address_input_box" placeholder="상세주소">
                         </p>
@@ -145,26 +136,27 @@
                     </li>
                     <li>
                         <div class="order_info_box">핸드폰 번호</div>
+                        <p>
+                            <input type="text" oninput="autoHyphen(this)" maxlength="13" placeholder="010 - 1234 - 5678" value="">
+                        </p>
                     </li>
                     <li>
                         <div class="order_info_box">수령인</div>
+                        <input type="text" placeholder="이름" maxlength="4" value="">
                     </li>
                     <li>
-                        결제 방법
-                        <ul class="order_ul">
-                            <li class="payments_li">
-                                카카오페이
-                            </li>
-                            <li class="payments_li">
-                                삼성페이
-                            </li>
-                            <li class="payments_li">
-                                신용카드 결제
-                            </li>
-                        </ul>
+                        <div class="order_info_box">결제 방법</div>
+                        <div class="wrap_payments_type">
+                            <div id="kakao_pay"><button>카카오 페이</button></div>
+                            <div id="samsung_pay"><button>삼성 페이</button></div>
+                            <div id="credit_card"><button>신용카드 결제</button></div>
+                        </div>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div class="total_amount">
+            총 금액: 67,000원
         </div>
     </div>
 </body>

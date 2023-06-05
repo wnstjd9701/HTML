@@ -1,81 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Document</title>
-    <style>
-        body {
-            margin: 0, auto;
-        }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-        a:link,
-        a:visited {
-            text-decoration: none;
-            color: pink;
-            margin-top: 25px;
-            margin-right: 40px;
-        }
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
-        a:hover {
-            color: orange;
-        }
-        
-        #logo{
-            width: 50%;
-            height: 50%;
-        }
+.slider {
+  width: 100%;
+  height: 400px;
+  background-image: url('slider1.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-        #desktop_menu {
-            position: relative;
-            display: flex;
-            height: 100vh;
-            /* background-color: black; */
-            display: flex;
-            justify-content: space-between;
-            font-size: 15px;
-            margin-top: 50px;
-        }
+.slider h1 {
+  font-size: 40px;
+  color: #fff;
+}
 
-        .inner_div_wrap_menu_left {
-            margin-left: 5%;
-        }
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
 
-        .inner_div_wrap_menu_left .inner_div_wrap_menu_center .inner_div_wrap_menu_right {
-            position: absolute;
-        }
-    </style>
+.product {
+  width: 200px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.product img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.banner {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 20px;
+}
+
+.navigation {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation ul li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.navigation ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+</style>
 </head>
-
 <body>
-    <div id="wrap">
-        <nav id="desktop_menu">
-            <div class="inner_div_wrap_menu_left">
-                <div class="icon_image">
-                    <a href="#">
-                        <div class="grid_menu"><img id="logo" src="./webPage/img/lion.png" alt=""></div>
-                    </a>
-                </div>
-            </div>
-            <div class="inner_div_wrap_menu_center">
-                <div class="grid_menu">
-                    <a href="/">Home</a>
-                    <a href="#">Works</a>
-                    <a href="#">Studio</a>
-                    <a href="#">Services</a>
-                    <a href="#">Pricing</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-            <div class="inner_div_wrap_menu_right">
-                <div class="grid_menu">
-                    <a href="#">Login</a>
-                    <a href="#">Logout</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-</body>
 
+<header>
+  <h1>쇼핑몰 로고</h1>
+</header>
+
+<div class="slider">
+  <h1>특별한 제안</h1>
+</div>
+
+<div class="product-list">
+  <div class="product">
+    <img src="./Project/Image/appleWatch.png" alt="제품 1">
+    <h3>제품 1</h3>
+    <p>가격: $10</p>
+    <button>구매하기</button>
+  </div>
+  <div class="product">
+    <img src="./Project/Image/appleWatch.png" alt="제품 2">
+    <h3>제품 2</h3>
+    <p>가격: $20</p>
+    <button>구매하기</button>
+  </div>
+  <div class="product">
+    <img src="./Project/Image/appleWatch.png" alt="제품 3">
+    <h3>제품 3</h3>
+    <p>가격: $30</p>
+    <button>구매하기</button>
+  </div>
+</div>
+
+<div class="banner">
+  <h2>추가 정보 또는 프로모션 배너</h2>
+  <p>이곳에 내용을 추가하세요</p>
+</div>
+
+<div class="navigation">
+  <ul>
+    <li><a href="#">홈</a></li>
+    <li><a href="#">제품</a></li>
+    <li><a href="#">할인</a></li>
+    <li><a href="#">문의하기</a></li>
+  </ul>
+</div>
+
+<footer class="footer">
+  &copy; 2023 쇼핑몰. All rights reserved.
+</footer>
+
+</body>
 </html>
