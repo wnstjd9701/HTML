@@ -48,7 +48,7 @@ body {
 .product_info {
     display: flex;
     align-items: center;
-    background-color: #ffe5cc;
+    background-color: #f9f9f9;
     padding: 15px;
     border-radius: 5px;
 }
@@ -173,7 +173,6 @@ input {
 }
 input:hover{
     background-color: #d5dafa;
-    transition: 1.5s;
 }
 .order_info_box {
     height: 2em;
