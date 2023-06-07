@@ -1,5 +1,5 @@
 window.onload = () => {
-
+    totalPriceCalculate();
 }
 const addAmount = (event) => {
     // const productsList = document.getElementsByClassName("table_row");
@@ -68,7 +68,7 @@ const totalPriceCalculate = () => {
 
     // 배송비 
     let deliveryFee = document.getElementById("delivery_fee");
-    if (selectProductPrice > 500000 || selectProductPrice == 0) {
+    if (selectProductPrice > 50000 || selectProductPrice == 0) {
         deliveryFee.innerHTML = "0<span>&nbsp;\\</span>";
     } else {
         deliveryFee.innerHTML = "3,000<span>&nbsp;\\</span>";

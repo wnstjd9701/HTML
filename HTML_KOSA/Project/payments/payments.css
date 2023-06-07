@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color:  #f2faff;
+    background-color: #f2faff;
 }
 
 #container {
@@ -168,14 +168,56 @@ ul {
 input {
     height: 40px;
     vertical-align: middle;
-    border: 1px solid #dadada;
+    border: 1px solid rgb(255, 255, 255);
     padding: 0px 15px;
 }
-input:hover{
+
+input:hover {
     background-color: #d5dafa;
 }
+
 .order_info_box {
     height: 2em;
+}
+
+p input::placeholder {
+    color: black;
+}
+
+.wrap_payments_type {
+    display: flex;
+    gap: 30px;
+}
+
+.wrap_payments_type div {
+    flex: 1;
+}
+#kakao_pay button{
+    background-color: rgb(255, 255, 110);
+    color: black;
+}
+#kakao_pay button:hover{
+    background-color: yellow;
+}
+#samsung_pay button{
+    background-color: rgb(68, 68, 228);
+}
+#samsung_pay button:hover{
+    background-color: blue;
+}
+.wrap_payments_type button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d255ff;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.wrap_payments_type button:hover {
+    background-color: #c530fb;
 }
 
 .address_box {
@@ -194,4 +236,63 @@ input:hover{
     font-weight: bold;
     font-size: 20px;
     margin-top: 10px;
+}
+
+.input_box:focus {
+    outline: none;
+    border-color: #a335da;
+}
+
+.btn-find-postcode {
+    padding: 8px 12px;
+    background-color: #b163d8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-find-postcode:hover {
+    background-color: #a335da;
+}
+
+.address_input_box:focus+.btn-find-postcode {
+    background-color: #a335da;
+}
+
+.address_input_box::placeholder {
+    color: #ccc;
+}
+
+.phone_number_input_box {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    width: 45%;
+}
+.phone_number_input_box input {
+    flex: 1;
+    outline: none;
+    padding: 0;
+    margin-right: 10px;
+    padding: 0 10px;
+}
+
+.phone_number_input_box input::placeholder {
+    color: #ccc;
+}
+
+.phone_number_input_box button {
+    background-color: #904cbe;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.phone_number_input_box button:hover {
+    background-color: #b765c7;
 }

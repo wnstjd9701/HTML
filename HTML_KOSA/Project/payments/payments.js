@@ -1,9 +1,9 @@
 window.onload = () => {
-  // const test = new TypeIt(".top_name", {
-  //   strings: "결제 페이지",
-  //   speed: 200,
-  //   waitUntilVisible: true,
-  // }).go();
+  const test = new TypeIt(".top_name", {
+    strings: "결제 페이지",
+    speed: 200,
+    waitUntilVisible: true,
+  }).go();
   // const productNameList = document.querySelectorAll('.product_name');
   // console.log(productNameList);
 
@@ -15,6 +15,16 @@ window.onload = () => {
   //     waitUntilVisible: true,
   //   }).go();
   // })
+  const productPriceTextLists = document.querySelectorAll(".product_price");
+            const productAmountTextLists = document.querySelectorAll(".product_amount");
+            var totalPrice = 0;
+            
+            for(i=0; i<productPriceTextLists.length; i++){
+                let productPrice = parseInt(productPriceTextLists[i].innerHTML.replace(/,/g, ''));
+                let productAmount = parseInt(productAmountTextLists[i].innerHTML);
+                totalPrice += productPrice * productAmount;
+            }
+            document.getElementById('total').innerHTML = totalPrice.toLocaleString();
 };
 
 const autoHyphen = (target) => {

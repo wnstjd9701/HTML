@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contents_cart {
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        .cart_top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cart_top img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .cart_top span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .cart_content {
+            overflow-x: auto;
+        }
+
+        .cart_table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table_head th {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .td_product_select,
+        .td_body {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .td_product_select input[type="checkbox"] {
+            transform: scale(1.5);
+        }
+
+        .product_information {
+            display: flex;
+            align-items: center;
+        }
+
+        .product_image img {
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .product_name {
+            font-weight: bold;
+        }
+
+        .quantity_control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity_control button {
+            font-weight: bold;
+            padding: 5px 10px;
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .quantity_control input[type="text"] {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .total_price {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .checkout_button {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .checkout_button button {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            position: absolute;
+            background-color: #fefefe;
+            top: 30%;
+            left: 25%;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+        }
+
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .modal-quantity-control button {
+            font-weight: bold;
+            padding: 5px 10px;
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-quantity-control input[type="text"] {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>장바구니</h1>
+    </header>
+    <div id="wrap">
+        <section class="contents_cart">
+            <div class="cart_top">
+                <img src="cart.png" alt="cart">
+                <span>장바구니</span>
+            </div>
+            <div class="cart_content">
+                <table class="cart_table">
+                    <thead>
+                        <tr class="table_head">
+                            <th class="td_product_select">선택</th>
+                            <th class="td_product_image">이미지</th>
+                            <th class="td_product_name">상품명</th>
+                            <th class="td_quantity">수량</th>
+                            <th class="td_price">가격</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="td_product_select"><input type="checkbox"></td>
+                            <td class="td_product_image">
+                                <div class="product_image">
+                                    <img src="product1.jpg" alt="product1">
+                                </div>
+                            </td>
+                            <td class="td_product_name">
+                                <div class="product_information">
+                                    <div class="product_image">
+                                        <img src="product1.jpg" alt="product1">
+                                    </div>
+                                    <div class="product_name">상품 1</div>
+                                </div>
+                            </td>
+                            <td class="td_quantity">
+                                <div class="quantity_control">
+                                    <button onclick="openModal(1)">-</button>
+                                    <input type="text" value="1">
+                                    <button onclick="openModal(1)">+</button>
+                                </div>
+                            </td>
+                            <td class="td_price">10,000원</td>
+                        </tr>
+                        <tr>
+                            <td class="td_product_select"><input type="checkbox"></td>
+                            <td class="td_product_image">
+                                <div class="product_image">
+                                    <img src="product2.jpg" alt="product2">
+                                </div>
+                            </td>
+                            <td class="td_product_name">
+                                <div class="product_information">
+                                    <div class="product_image">
+                                        <img src="product2.jpg" alt="product2">
+                                    </div>
+                                    <div class="product_name">상품 2</div>
+                                </div>
+                            </td>
+                            <td class="td_quantity">
+                                <div class="quantity_control">
+                                    <button onclick="openModal(2)">-</button>
+                                    <input type="text" value="1">
+                                    <button onclick="openModal(2)">+</button>
+                                </div>
+                            </td>
+                            <td class="td_price">20,000원</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="total_price">총 가격: 30,000원</div>
+            <div class="checkout_button">
+                <button onclick="openCheckout()">구매하기</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 모달 창 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-quantity-control">
+                <button onclick="decrementQuantity()">-</button>
+                <input type="text" id="modal-quantity-input" value="1">
+                <button onclick="incrementQuantity()">+</button>
+            </div>
+            <div class="modal-buttons">
+                <button onclick="updateQuantity()">확인</button>
+                <button onclick="closeModal()">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 모달 창 열기
+        function openModal(productId) {
+            var modal = document.getElementById("modal");
+            modal.style.display = "block";
+
+            var quantityInput = document.getElementById("modal-quantity-input");
+            var currentQuantity = parseInt(document.getElementById("quantity-" + productId).textContent);
+            quantityInput.value = currentQuantity;
+        }
+
+        // 모달 창 닫기
+        function closeModal() {
+            var modal = document.getElementById("modal");
+            modal.style.display = "none";
+        }
+
+        // 수량 감소
+        function decrementQuantity() {
+            var quantityInput = document.getElementById("modal-quantity-input");
+            var currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity > 1) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        }
+
+        // 수량 증가
+        function incrementQuantity() {
+            var quantityInput = document.getElementById("modal-quantity-input");
+            var currentQuantity = parseInt(quantityInput.value);
+            quantityInput.value = currentQuantity + 1;
+        }
+
+        // 수량 업데이트
+        function updateQuantity() {
+            var quantityInput = document.getElementById("modal-quantity-input");
+            var updatedQuantity = parseInt(quantityInput.value);
+
+            // 여기서 수량 업데이트 작업을 수행하세요.
+            // 예를 들어, 선택한 상품의 수량 업데이트 코드를 추가하세요.
+
+            closeModal(); // 모달 창 닫기
+        }
+
+        // 구매하기 버튼 클릭 시 처리
+        function openCheckout() {
+            // 여기에 구매하기 버튼 클릭 시 수행할 작업을 추가하세요.
+        }
+    </script>
+</body>
+
+</html>

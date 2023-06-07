@@ -3,9 +3,366 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./cart.css">
-    <script src="./cart.js"></script>
-    <title>Carts</title>
+    <style>body {
+        position: relative;
+        font-size: 100%;
+        height: 100vh;
+        margin: 0 auto;
+        background-color: #d8dcf4;
+        animation: gradientAnimation 13s ease infinite;
+        background: linear-gradient(-45deg, #AF8DEB, #C78AE3, #DE8AC7, #E38AA1);
+        background-size: 400% 400%;
+    }
+    
+    @keyframes gradientAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+    
+        50% {
+            background-position: 100% 50%;
+        }
+    
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+    
+    header {
+        width: 1050px;
+        height: 10%;
+        border-bottom: 2px solid black;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    #wrap {
+        position: relative;
+        height: 100vh;
+    }
+    
+    section {
+        position: absolute;
+        height: 80vh;
+    }
+    
+    footer {
+        position: absolute;
+        height: 10vh;
+        width: 100%;
+        top: 90%;
+    }
+    
+    table {
+        position: absolute;
+        border-collapse: collapse;
+        background-color: #AF8DEB;
+        width: 80%;
+    }
+    
+    tr {}
+    
+    .table_head {
+        height: 50px;
+    }
+    
+    #th_select_product {
+        width: 20px;
+    }
+    
+    tr>.td_product_select {
+        width: 20px;
+    }
+    
+    #th_product_information {
+        text-align: left;
+        padding-left: 50px;
+    }
+    
+    th {
+        border-bottom: 2px solid black;
+        width: 120px;
+    }
+    
+    td {
+        border-bottom: 2px solid black;
+        font-weight: bolder;
+    }
+    
+    input {
+        font-weight: bold;
+    }
+    
+    a:link,
+    a:visited {
+        color: #ebedfa;
+        text-decoration-line: none;
+    }
+    
+    .logo {
+        float: left;
+        padding: 20px 0 10px;
+        font-size: 40px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .contents_cart {
+        position: relative;
+    }
+    
+    .cart_top {
+        position: absolute;
+        border: 2px solid skyblue;
+        border-radius: 50%;
+        font-size: 30px;
+        text-align: left;
+        height: 7%;
+        width: 11%;
+        left: 10%;
+    }
+    
+    .cart_top>span {
+        font-weight: bolder;
+        padding-left: 5%;
+    }
+    
+    .cart_top>span>img {
+        position: absolute;
+        margin-left: 10px;
+        top: 2%;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .cart_content {
+        position: relative;
+        border: 5px solid red;
+    }
+    
+    .cart_table {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+    }
+    
+    .td_body {
+        text-align: center;
+    }
+    
+    .product_information {
+        text-align: center;
+        font-size: 12px;
+        font-weight: bolder;
+    }
+    
+    .product_image {
+        margin-top: 5px;
+        width: 100px;
+        height: 100px;
+        transition: all 1s;
+    }
+    
+    .product_image:hover {
+        transform: scale(1.2);
+        border-radius: 30%;
+    }
+    
+    .product_option_list {
+        font-weight: bold;
+    }
+    
+    #product_amount {
+        text-align: center;
+        width: 15px;
+    }
+    
+    .product_amount {
+        text-align: center;
+        width: 15px;
+    }
+    
+    #order_table_select {
+        position: absolute;
+        font-size: 1.2em;
+        font-weight: 900;
+        top: 80%;
+        left: 10%;
+    }
+    
+    #order_total_product {
+        position: absolute;
+        width: 20%;
+        top: 80%;
+        left: 70%;
+    }
+    
+    .total_product_information {
+        font-size: 15px;
+        font-weight: bolder;
+        height: 100%;
+    }
+    
+    #cart_order {
+        position: absolute;
+        font-size: 1.2em;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+        height: 30%;
+        border-bottom: none;
+    }
+    
+    #cart_order>a {
+        position: absolute;
+        left: -1.5%;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #delete_product,
+    #delete_product:hover {
+        color: salmon;
+        cursor: pointer;
+    }
+    
+    .btn {
+        background-color: #fff;
+        border: 2px solid #7e87c4;
+        border-radius: 5px;
+        font-weight: bolder;
+    }
+    
+    .btn:hover {
+        color: white;
+        background-color: skyblue;
+    }
+    
+    .total_product_price_information {
+        position: relative;
+        list-style: none;
+        line-height: 2em;
+        font-size: 35px;
+    }
+    
+    .total_product_div {
+        border-bottom: 2px solid #ebedfa;
+        font-size: 1.2em;
+        color: white;
+    }
+    
+    .total_product_div>span {
+        width: 100px;
+    }
+    
+    #total_price {
+        margin: 20%;
+    }
+    
+    #sub_total_price {
+        margin: 35%;
+    }
+    
+    #delivery_fee {
+        margin: 35%;
+    }
+    
+    .order_price {
+        text-align: right;
+        margin: 30%;
+    }
+    
+    .order_button {
+        display: inline-block;
+        border-radius: 4px;
+        background-color: #6276f4;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 20px;
+        padding: 10px;
+        width: 200px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+    
+    .order_button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+    
+    .order_button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+    
+    .order_button:hover span {
+        padding-right: 25px;
+    }
+    
+    .order_button:hover span:after {
+        opacity: 1;
+        right: 0;
+    }
+    
+    .modal {
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        max-width: 400px;
+        width: 50%;
+        text-align: center;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    
+      .modal h2 {
+        margin-top: 0;
+      }
+    
+      .modal-buttons {
+        margin-top: 20px;
+      }
+    
+      .modal-buttons button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        border-radius: 4px;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    
+      .modal-buttons button.yes {
+        background: #df66df;
+        color: #fff;
+      }
+      .modal-buttons button.yes:hover{
+        background: #de52de;
+      }
+      .modal-buttons button.no {
+        background: #9e32c5;
+        color: #fff;
+      }
+      .modal-buttons button.no:hover{
+        background: #9a1ec7;
+      }
+      .hidden {
+        display: none;
+      }</style>
 </head>
 
 <body>
@@ -235,5 +592,139 @@
         </footer> -->
     </div>
 </body>
+<script>
+    window.onload = () => {
+    totalPriceCalculate();
+}
+const addAmount = (event) => {
+    // const productsList = document.getElementsByClassName("table_row");
+    // console.log(productsList.length); // 다음에 추가할 때 product_(length+1)
+    const btnId = event.target.id.split('_');
+    const productId = btnId[2];
+    
+    const amount = document.getElementById(`product_amount_${productId}`);
 
+    const checkBox = document.querySelectorAll("input[name=product]");
+    // 체크가 안되어 있는데 상품 수량을 변경할 경우 체크 해줌 / 상품 인덱스는 1부터 시작하므로 checkBox의 인덱스는 productId - 1
+    if (checkBox[productId - 1].checked === false) {
+        checkBox[productId - 1].checked = true;
+        checkSelectAll();
+    }
+    amount.innerHTML = parseInt(amount.innerHTML) + 1;
+    // 총 금액 변경
+    totalPriceCalculate();
+}
+
+const minusAmount = (event) => {
+    const btnId = event.target.id.split('_');
+    const productId = btnId[2];
+    
+    const amount = document.getElementById(`product_amount_${productId}`);
+
+    const checkBox = document.querySelectorAll("input[name=product]");
+    // 체크가 안되어 있는데 상품 수량을 변경할 경우 체크 해줌 / 상품 인덱스는 1부터 시작하므로 checkBox의 인덱스는 productId - 1
+    if (checkBox[productId - 1].checked === false) {
+        checkBox[productId - 1].checked = true;
+        checkSelectAll();
+    }
+    if (amount.innerHTML <= 0) {
+        alert("수량이 0보다 작습니다.");
+    }
+    else {
+        amount.innerHTML = parseInt(amount.innerHTML) - 1;
+        if (amount.innerHTML == 0) {
+            checkBox[productId - 1].checked = false;
+            checkSelectAll();
+        }
+        // 총 금액 변경
+        totalPriceCalculate();
+    }
+}
+
+const totalPriceCalculate = () => {
+    const productsList = document.getElementsByClassName("table_row");
+
+    let selectProductPrice = 0;
+    let checkBoxes = document.querySelectorAll("input[name=product]:checked");
+    checkBoxes.forEach((checkBox) => {
+        // 상품 아이디 가져오기
+        const productId = checkBox.id.split('_')[2];
+
+        let productPrice = productsList[productId - 1].children[5].innerHTML.split(/>|</)[2]
+        // productPrice.split(',').join('');
+        productPrice = productPrice.replace(/,/g, '');
+
+        // 상품 수량 가져오기
+        let productAmount = document.getElementById(`product_amount_${productId}`);
+
+        // 총 금액 = 상품 수량 * 상품 가격
+        selectProductPrice += parseInt(productPrice) * parseInt(productAmount.innerHTML);
+    })
+
+    // 배송비 
+    let deliveryFee = document.getElementById("delivery_fee");
+    if (selectProductPrice > 50000 || selectProductPrice == 0) {
+        deliveryFee.innerHTML = "0<span>&nbsp;\\</span>";
+    } else {
+        deliveryFee.innerHTML = "3,000<span>&nbsp;\\</span>";
+    }
+
+    let subTotalPrice = document.getElementById("sub_total_price");
+    let totalPrice = document.getElementById("total_price");
+    subTotalPrice.innerHTML = selectProductPrice.toLocaleString() + "<span>&nbsp;\\</span>";
+    totalPrice.innerHTML = (parseInt(deliveryFee.innerHTML.split(',').join('')) + selectProductPrice).toLocaleString() + "<span>&nbsp;\\</span>";
+}
+
+const checkSelectAll = () => {
+    // 모든 체크박스
+    const checkBoxes = document.querySelectorAll('input[name="product"]');
+
+    // 선택된 체크박스
+    const checked = document.querySelectorAll('input[name="product"]:checked');
+
+    // 전체 선택 체크박스
+    const selectAll = document.querySelector('input[name="selectAll"]');
+
+    // 모든 체크박스(선택됨)와 선택된 체크박스의 길이가 같으면  
+    if (checkBoxes.length === checked.length) {
+        //전체 선택 체크박스 체크
+        selectAll.checked = true;
+    } else {
+        // 전체 선택 체크박스 해제
+        selectAll.checked = false;
+    }
+    totalPriceCalculate();
+}
+
+const selectAll = (selectBox) => {
+    // selectBox 가 check 되어 있으면 true, 아니면 false
+    const checkBoxes = document.getElementsByName('product');
+    checkBoxes.forEach((checkBox) => {
+        checkBox.checked = selectBox.checked;
+    })
+    totalPriceCalculate();
+}
+
+const deleteSelectProduct = () => {
+    // 체크된 productList 가져오기
+    const checkedProductsList = document.querySelectorAll('input[name=product]:checked');
+    const productRowList = document.querySelectorAll(".table_row");
+    const productIdList = [];
+    // productId 가져오기
+    checkedProductsList.forEach((productInfo) => {
+        productIdList.push(productInfo.id.split('_')[2]);
+    })
+    productIdList.forEach((productId) => {
+        productRowList[productId-1].innerHTML = "";
+    })
+    totalPriceCalculate();
+}
+
+const changeProductPrice = () => {
+    const orderPrices = document.querySelectorAll(".order_price");
+    console.log(orderPrices[0]);
+}
+
+
+</script>
 </html>

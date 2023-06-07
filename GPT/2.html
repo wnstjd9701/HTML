@@ -1,362 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payments</title>
+    <title>상품 페이지</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            background-color: #e1f2fd;
-        }
-
-        #container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .logo {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .top_name {
-            text-align: center;
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-
-        .wrap_product_info {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .product_info_main {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .wrap_grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 20px;
-        }
-
-        .product_info {
-            display: flex;
-            align-items: center;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .product_info:hover{
-            background-color: rgb(172, 226, 224);
-            transition: 1.5s;
-        }
-        .wrap_product_image {
-            width: 80px;
-            height: 80px;
-            margin-right: 15px;
-        }
-
-        .product_image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .product_info_text {
-            flex: 1;
-        }
-
-        .wrap_product_name,
-        .wrap_product_price,
-        .wrap_product_amount {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .wrap_product_name span,
-        .wrap_product_price span,
-        .wrap_product_amount span {
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        .wrap_product_name .product_name {
-            color: #555;
-        }
-
-        .product_info:last-child {
-            margin-bottom: 0;
-        }
-
-        .wrap_order_info {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        .order_info {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .user_order_info ul {
-            list-style: none;
-            padding: 0;
+            font-family: Arial, sans-serif;
             margin: 0;
+            padding: 20px;
         }
-
-        .user_order_info li {
-            margin-bottom: 20px;
+        
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-
-        .order_info_box {
-            font-weight: bold;
+        
+        .product-card {
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px;
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: auto;
             margin-bottom: 10px;
         }
-
-        .address_box {
-            align-items: center;
-            margin-top: 10px;
+        
+        .product-card .product-name {
+            font-weight: bold;
         }
-
-        .address_box input[type="text"] {
-            flex: 1;
-            margin-right: 5px;
+        
+        .product-card .product-price {
+            color: #888;
         }
-
-        .order_ul {
-            list-style: none;
-            padding-left: 20px;
-            margin-top: 5px;
-        }
-
-        .order_ul li {
-            margin-bottom: 5px;
-        }
-
-        .order_ul li::before {
-            content: "";
-            margin-right: 5px;
-        }
-
-        /* Responsive styles */
-
-        @media (max-width: 600px) {
-            .wrap_grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Rest of your CSS code */
-        ul {
-            list-style: none;
-            text-align: left;
-            line-height: 3em;
-        }
-
-        input {
-            height: 40px;
-            vertical-align: middle;
-            border: 1px solid #dadada;
-            padding: 0px 15px;
-        }
-
-        .order_info_box {
-            height: 2em;
-        }
-
-        .address_box {
-            margin-bottom: 0px;
-        }
-        #zip-code{
-            width: 30%;
-        }
-        .address_input_box {
-            width: 70%;
-        }
-
-        /* New styles for payment buttons */
-
-        .wrap_payments_type {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .payment_button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .payment_button:hover {
-            background-color: #45a049;
-        }
-
     </style>
 </head>
-
 <body>
-    <div id="container">
-        <div class="logo">
-            Logo
-        </div>
-        <div class="top_name">
-            결제 페이지
-        </div>
-        <div class="wrap_product_info">
-            <div class="product_info_main">
-                결제 상품
-            </div>
-            <div class="wrap_grid">
-                <div class="product_info">
-                    <div class="wrap_product_image">
-                        <img class="product_image" src="../Image/assets/atomheartmother.png" alt="atomheartmother">
-                    </div>
-                    <div class="product_info_text">
-                        <div class="wrap_product_name">
-                            <span>상품명</span>
-                            <span class="product_name">atomheardmother</span>
-                        </div>
-                        <div class="wrap_product_price">
-                            <span>가격</span>
-                            <span class="product_price">14,000</span>
-                        </div>
-                        <div class="wrap_product_amount">
-                            <span>수량</span>
-                            <span class="product_amount">1</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_info">
-                    <div class="wrap_product_image">
-                        <img class="product_image" src="../Image/assets/avobath.png" alt="atomheartmother">
-                    </div>
-                    <div class="product_info_text">
-                        <div class="wrap_product_name">
-                            <span>상품명</span>
-                            <span class="product_name">avobath</span>
-                        </div>
-                        <div class="wrap_product_price">
-                            <span>가격</span>
-                            <span class="product_price">14,000</span>
-                        </div>
-                        <div class="wrap_product_amount">
-                            <span>수량</span>
-                            <span class="product_amount">1</span>
-                        </div>
-                    </div>
-                </div>
+    <h1>상품 페이지</h1>
 
-                <div class="product_info">
-                    <div class="wrap_product_image">
-                        <img class="product_image" src="../Image/assets/bigblue.png" alt="atomheartmother">
-                    </div>
-                    <div class="product_info_text">
-                        <div class="wrap_product_name">
-                            <span>상품명</span>
-                            <span class="product_name">bigblue</span>
-                        </div>
-                        <div class="wrap_product_price">
-                            <span>가격</span>
-                            <span class="product_price">19,000</span>
-                        </div>
-                        <div class="wrap_product_amount">
-                            <span>수량</span>
-                            <span class="product_amount">1</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="product_info">
-                    <div class="wrap_product_image">
-                        <img class="product_image" src="../Image/assets/blackrose.png" alt="atomheartmother">
-                    </div>
-                    <div class="product_info_text">
-                        <div class="wrap_product_name">
-                            <span>상품명</span>
-                            <span class="product_name">blackrose</span>
-                        </div>
-                        <div class="wrap_product_price">
-                            <span>가격</span>
-                            <span class="product_price">20,000</span>
-                        </div>
-                        <div class="wrap_product_amount">
-                            <span>수량</span>
-                            <span class="product_amount">1</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="product-container">
+        <!-- 기존 상품들 -->
+        <div class="product-card">
+            <img src="product1.jpg" alt="Product 1">
+            <div class="product-name">상품 1</div>
+            <div class="product-price">$10</div>
         </div>
-        <div class="wrap_order_info">
-            <div class="order_info">주문 정보</div>
-            <div class="user_order_info">
-                <ul>
-                    <li>
-                        <div class="order_info_box">주소</div>
-                        <p class="address_box">
-                            <input type="text" id="zip-code" class="address_input_box" placeholder="우편번호">
-                            <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
-                            <div></div>
-                            <input type="text" id="address-1" class="address_input_box" placeholder="도로명주소">
-                            <input type="text" id="address-2" class="address_input_box" placeholder="상세주소">
-                        </p>
-                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-                        <script>
-                            function execDaumPostcode() {
-                                new daum.Postcode({
-                                    oncomplete: function (data) {
-                                        document.getElementById('zip-code').value = data.zonecode;
-                                        document.getElementById('address-1').value = data.address;
-                                    }
-                                }).open();
-                            }
-                        </script>
-                    </li>
-                    <li>
-                        <div class="order_info_box">핸드폰 번호</div>
-                        <p>
-                            <input type="text" placeholder="010 - 1234 - 5678" value="">
-                        </p>
-                    </li>
-                    <li>
-                        <div class="order_info_box">수령인</div>
-                        <input type="text" placeholder="이름" value="">
-                    </li>
-                </ul>
-            </div>
+        <div class="product-card">
+            <img src="product2.jpg" alt="Product 2">
+            <div class="product-name">상품 2</div>
+            <div class="product-price">$20</div>
         </div>
-        <div class="wrap_payments_type">
-            <button class="payment_button">카카오페이</button>
-            <button class="payment_button">삼성페이</button>
-            <button class="payment_button">신용카드</button>
-        </div>
+        <!-- 추가 상품 -->
     </div>
-</body>
 
+    <button id="add-product">상품 추가</button>
+
+    <script>
+        // 새로운 상품 추가 이벤트 핸들러
+        function addProduct() {
+            var container = document.querySelector('.product-container');
+
+            // 새로운 상품 카드 생성
+            var productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+
+            var productImage = document.createElement('img');
+            productImage.src = 'new-product.jpg';
+            productImage.alt = 'New Product';
+            productCard.appendChild(productImage);
+
+            var productName = document.createElement('div');
+            productName.classList.add('product-name');
+            productName.textContent = '새로운 상품';
+            productCard.appendChild(productName);
+
+            var productPrice = document.createElement('div');
+            productPrice.classList.add('product-price');
+            productPrice.textContent = '$30';
+            productCard.appendChild(productPrice);
+
+            // 상품을 맨 아래에 추가
+            container.appendChild(productCard);
+        }
+
+        // 상품 추가 버튼 클릭 이벤트 리스너 등록
+        var addButton = document.getElementById('add-product');
+        addButton.addEventListener('click', addProduct);
+    </script>
+</body>
 </html>

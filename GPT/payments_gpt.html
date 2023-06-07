@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments</title>
+    <script src="./payments.js"></script>
+    <link rel="stylesheet" href="./payments.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f2faff;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .top_name {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .wrap_product_info {
+            background-color: #ebedfa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .product_info_main {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .wrap_grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+        }
+
+        .product_info {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .product_info:hover {
+            background-color: #d5dafa;
+            transition: 1.5s;
+        }
+
+        .wrap_product_image {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+
+        .product_image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product_info_text {
+            flex: 1;
+        }
+
+        .wrap_product_name,
+        .wrap_product_price,
+        .wrap_product_amount {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .wrap_product_name span,
+        .wrap_product_price span,
+        .wrap_product_amount span {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .wrap_product_name .product_name {
+            color: #555;
+        }
+
+        .product_info:last-child {
+            margin-bottom: 0;
+        }
+
+        .wrap_order_info {
+            background-color: #ebedfa;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .order_info {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .user_order_info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .user_order_info li {
+            margin-bottom: 20px;
+        }
+
+        .order_info_box {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .address_box {
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .address_box input[type="text"] {
+            flex: 1;
+            margin-right: 5px;
+        }
+
+        .order_ul {
+            list-style: none;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        .order_ul li {
+            margin-bottom: 5px;
+        }
+
+        .order_ul li::before {
+            content: "";
+            margin-right: 5px;
+        }
+
+        /* Responsive styles */
+
+        @media (max-width: 600px) {
+            .wrap_grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Rest of your CSS code */
+        ul {
+            list-style: none;
+            text-align: left;
+            line-height: 3em;
+        }
+
+        input {
+            height: 40px;
+            vertical-align: middle;
+            border: 1px solid #dadada;
+            padding: 0px 15px;
+        }
+
+        input:hover {
+            background-color: #d5dafa;
+        }
+
+        .order_info_box {
+            height: 2em;
+        }
+
+        p input::placeholder {
+            color: black;
+        }
+
+        .wrap_payments_type {
+            display: flex;
+            gap: 30px;
+        }
+
+        .wrap_payments_type div {
+            flex: 1;
+        }
+
+        #kakao_pay button {
+            background-color: rgb(255, 255, 110);
+            color: black;
+        }
+
+        #kakao_pay button:hover {
+            background-color: yellow;
+        }
+
+        #samsung_pay button {
+            background-color: rgb(68, 68, 228);
+        }
+
+        #samsung_pay button:hover {
+            background-color: blue;
+        }
+
+        .wrap_payments_type button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #d255ff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .wrap_payments_type button:hover {
+            background-color: #c530fb;
+        }
+
+        .address_box {
+            margin-bottom: 0px;
+        }
+
+        #zip-code {
+            width: 30%;
+        }
+
+        .address_input_box {
+            width: 70%;
+        }
+
+        .total_amount {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .address_input_box:focus {
+            outline: none;
+            border-color: #a335da;
+        }
+
+        .btn-find-postcode {
+            padding: 8px 12px;
+            background-color: #b163d8;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-find-postcode:hover {
+            background-color: #a335da;
+        }
+
+        .address_input_box:focus+.btn-find-postcode {
+            background-color: #a335da;
+        }
+
+        .address_input_box::placeholder {
+            color: #ccc;
+        }
+
+        .phone_number_input_box {
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            padding: 8px;
+            width: 45%;
+        }
+
+        .phone_number_input_box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin-right: 10px;
+        }
+
+        .phone_number_input_box input::placeholder {
+            color: #ccc;
+        }
+
+        .phone_number_input_box button {
+            background-color: #904cbe;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .phone_number_input_box button:hover {
+            background-color: #ce2fee;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="logo">
+            Logo
+        </div>
+        <div class="top_name">
+        </div>
+        <!-- 결제 페이지 typeit -->
+        <p id="simpleUsage"></p>
+        <div class="wrap_product_info">
+            <div class="product_info_main">
+                결제 상품
+            </div>
+            <div class="wrap_grid">
+                <div class="product_info">
+                    <div class="wrap_product_image">
+                        <img class="product_image" src="../Image/assets/atomheartmother.png" alt="atomheartmother">
+                    </div>
+                    <div class="product_info_text">
+                        <div class="wrap_product_name">
+                            <span>상품명</span>
+                            <span id="atomheardmother" class="product_name">atomheardmother</span>
+                        </div>
+                        <div class="wrap_product_price">
+                            <span>가격</span>
+                            <span class="product_price">14,000</span>
+                        </div>
+                        <div class="wrap_product_amount">
+                            <span>수량</span>
+                            <span class="product_amount">1</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="wrap_product_image">
+                        <img class="product_image" src="../Image/assets/avobath.png" alt="atomheartmother">
+                    </div>
+                    <div class="product_info_text">
+                        <div class="wrap_product_name">
+                            <span>상품명</span>
+                            <span id="avobath" class="product_name">avobath</span>
+                        </div>
+                        <div class="wrap_product_price">
+                            <span>가격</span>
+                            <span class="product_price">14,000</span>
+                        </div>
+                        <div class="wrap_product_amount">
+                            <span>수량</span>
+                            <span class="product_amount">1</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="product_info">
+                    <div class="wrap_product_image">
+                        <img class="product_image" src="../Image/assets/bigblue.png" alt="atomheartmother">
+                    </div>
+                    <div class="product_info_text">
+                        <div class="wrap_product_name">
+                            <span>상품명</span>
+                            <span id="bigblue" class="product_name">bigblue</span>
+                        </div>
+                        <div class="wrap_product_price">
+                            <span>가격</span>
+                            <span class="product_price">19,000</span>
+                        </div>
+                        <div class="wrap_product_amount">
+                            <span>수량</span>
+                            <span class="product_amount">1</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="wrap_product_image">
+                        <img class="product_image" src="../Image/assets/blackrose.png" alt="atomheartmother">
+                    </div>
+                    <div class="product_info_text">
+                        <div class="wrap_product_name">
+                            <span>상품명</span>
+                            <span id="blackrose" class="product_name">blackrose</span>
+                        </div>
+                        <div class="wrap_product_price">
+                            <span>가격</span>
+                            <span class="product_price">20,000</span>
+                        </div>
+                        <div class="wrap_product_amount">
+                            <span>수량</span>
+                            <span class="product_amount">1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrap_order_info">
+            <div class="order_info">주문 정보</div>
+            <div class="user_order_info">
+                <ul>
+                    <li>
+                        <div class="order_info_box">주소</div>
+                        <p class="address_box">
+                            <input type="text" id="zip-code" class="address_input_box" placeholder="우편번호">
+                            <input type="button" onclick="execDaumPostcode()" class="btn-find-postcode" value="우편번호 찾기">
+                        <div></div>
+                        <input type="text" id="address-1" class="address_input_box" placeholder="도로명주소">
+                        <input type="text" id="address-2" class="address_input_box" placeholder="상세주소">
+                        </p>
+                        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                        <script>
+                            function execDaumPostcode() {
+                                new daum.Postcode({
+                                    oncomplete: function (data) {
+                                        document.getElementById('zip-code').value = data.zonecode;
+                                        document.getElementById('address-1').value = data.address;
+                                    }
+                                }).open();
+                            }
+                        </script>
+                    </li>
+                    <li>
+                        <div class="order_info_box">핸드폰 번호</div>
+                        <p class="phone_number_input_box">
+                            <input type="text" oninput="autoHyphen(this)" maxlength="13" placeholder="010 - 1234 - 5678"
+                                value="">
+                            <button>인증번호 요청</button>
+                        </p>
+                    </li>
+                    <li>
+                        <div class="order_info_box">수령인</div>
+                        <input type="text" placeholder="이름" maxlength="4" value="">
+                    </li>
+                    <li>
+                        <div class="order_info_box">결제 방법</div>
+                        <div class="wrap_payments_type">
+                            <div id="kakao_pay"><button>카카오 페이</button></div>
+                            <div id="samsung_pay"><button>삼성 페이</button></div>
+                            <div id="credit_card"><button>신용카드 결제</button></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            총 금액: <span id="total"></span>원
+        </div>
+    </div>
+    <script>
+        window.onload = () => {
+            const test = new TypeIt(".top_name", {
+                strings: "결제 페이지",
+                speed: 200,
+                waitUntilVisible: true,
+            }).go();
+            // const productNameList = document.querySelectorAll('.product_name');
+            // console.log(productNameList);
+
+            // // productNameList.forEach((productName) => {
+            // //   console.log(productName.id);
+            // //   new TypeIt(`#${productName.id}`, {
+            // //     strings: `${productName.id}`,
+            // //     speed: 200,
+            // //     waitUntilVisible: true,
+            // //   }).go();
+            // // })
+            const productPriceTextLists = document.querySelectorAll(".product_price");
+            const productAmountTextLists = document.querySelectorAll(".product_amount");
+            var totalPrice = 0;
+            
+            for(i=0; i<productPriceTextLists.length; i++){
+                let productPrice = parseInt(productPriceTextLists[i].innerHTML.replace(/,/g, ''));
+                let productAmount = parseInt(productAmountTextLists[i].innerHTML);
+                totalPrice += productPrice * productAmount;
+            }
+            document.getElementById('total').innerHTML = totalPrice.toLocaleString();
+        };
+
+        const autoHyphen = (target) => {
+            target.value = target.value
+                .replace(/[^0-9]/g, '')
+                .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+        }
+
+
+    </script>
+</body>
+
+</html>
