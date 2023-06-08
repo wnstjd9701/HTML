@@ -45,7 +45,8 @@
                                         checked></label>
                             </td>
                             <td class="td_product_image">
-                                <a href="#"><img class="product_image" src="../Image/assets/atomheartmother.png" alt="상품 이미지"></a>
+                                <a href="#"><img class="product_image" src="../Image/assets/atomheartmother.png"
+                                        alt="상품 이미지"></a>
                             </td>
                             <td class="td_product_information">
                                 <div class="product_information">atomheartmother</div>
@@ -79,7 +80,8 @@
                                         checked></label>
                             </td>
                             <td class="td_product_image">
-                                <a href="#"><img class="product_image" src="../Image/assets/avobath.png" alt="상품 이미지"></a>
+                                <a href="#"><img class="product_image" src="../Image/assets/avobath.png"
+                                        alt="상품 이미지"></a>
                             </td>
                             <td class="td_product_information">
                                 <div class="product_information">avobath</div>
@@ -113,7 +115,8 @@
                                         checked></label>
                             </td>
                             <td class="td_product_image">
-                                <a href="#"><img class="product_image" src="../Image/assets/bigblue.png" alt="상품 이미지"></a>
+                                <a href="#"><img class="product_image" src="../Image/assets/bigblue.png"
+                                        alt="상품 이미지"></a>
                             </td>
                             <td class="td_product_information">
                                 <div class="product_information">bigblue</div>
@@ -147,7 +150,8 @@
                                         checked></label>
                             </td>
                             <td class="td_product_image">
-                                <a href="#"><img class="product_image" src="../Image/assets/blackrose.png" alt="상품 이미지"></a>
+                                <a href="#"><img class="product_image" src="../Image/assets/blackrose.png"
+                                        alt="상품 이미지"></a>
                             </td>
                             <td class="td_product_information">
                                 <div class="product_information">blackrose</div>
@@ -190,15 +194,18 @@
                     <div class="total_product_information">
                         <div id="sub_total" class="total_product_div">
                             <span>SubTotal</span>
-                            <span id="sub_total_price" class="order_price" onchange="changeProductPrice()">6,589,000<span>&nbsp;\</span></span>
+                            <span id="sub_total_price" class="order_price"
+                                onchange="changeProductPrice()">6,589,000<span>&nbsp;\</span></span>
                         </div>
                         <div id="delivery" class="total_product_div">
                             <span>Delivery Fee</span>
-                            <span id="delivery_fee" class="order_price" onchange="changeProductPrice()">0<span>&nbsp;\</span></span>
+                            <span id="delivery_fee" class="order_price"
+                                onchange="changeProductPrice()">0<span>&nbsp;\</span></span>
                         </div>
                         <div id="total" class="total_product_div">
                             <span>Total</span>
-                            <span id="total_price" class="order_price" onchange="changeProductPrice()"><span>&nbsp;\</span></span>
+                            <span id="total_price" class="order_price"
+                                onchange="changeProductPrice()"><span>&nbsp;\</span></span>
                         </div>
                         <div id="cart_order" class="total_product_div">
                             <button class="order_button" onclick="openModal()"><span>Order</span></button>
@@ -207,25 +214,25 @@
                             <h2>주문 확인</h2>
                             <p>결제 페이지로 이동하시겠습니까?</p>
                             <div class="modal-buttons">
-                              <button class="yes" onclick="redirectToPayment()">예</button>
-                              <button class="no" onclick="closeModal()">아니오</button>
+                                <button class="yes" onclick="redirectToPayment()">예</button>
+                                <button class="no" onclick="closeModal()">아니오</button>
                             </div>
-                          </div>
-                        
-                          <script>
+                        </div>
+
+                        <script>
                             function openModal() {
-                              document.getElementById('modal').classList.remove('hidden');
+                                document.getElementById('modal').classList.remove('hidden');
                             }
-                        
+
                             function closeModal() {
-                              document.getElementById('modal').classList.add('hidden');
+                                document.getElementById('modal').classList.add('hidden');
                             }
-                        
+
                             function redirectToPayment() {
-                              window.location.href = '../payments/payments.html';
-                              console.log('결제 페이지로 이동');
+                                window.location.href = '../payments/payments.html';
+                                console.log('결제 페이지로 이동');
                             }
-                          </script>
+                        </script>
                     </div>
                 </div>
             </div>

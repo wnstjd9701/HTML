@@ -129,4 +129,3 @@ const changeProductPrice = () => {
     const orderPrices = document.querySelectorAll(".order_price");
     console.log(orderPrices[0]);
 }
-

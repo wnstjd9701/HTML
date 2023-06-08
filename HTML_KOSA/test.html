@@ -1,152 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>상품 결제</title>
-  <style>
-    /* CSS 스타일링 */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f1f1f1;
-    }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-    .product {
-      margin-bottom: 10px;
-    }
-    .product span {
-      display: inline-block;
-      width: 150px;
-      font-weight: bold;
-    }
-    .quantity-input {
-      display: flex;
-      align-items: center;
-    }
-    .quantity-input input {
-      width: 30px;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-    .quantity-input button {
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      padding: 5px 10px;
-      margin-left: 5px;
-      cursor: pointer;
-    }
-    .quantity-input button:hover {
-      background-color: #45a049;
-    }
-    .button-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-    #message {
-      text-align: center;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-      transition: 1s;
-    }
-    .payment-result {
-      opacity: 0;
-      transition: opacity 2s;
-    }
-    .payment-result.show {
-      opacity: 1;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>상품 결제</h1>
+<div class="total-container">
+  <div class="subtotal">Subtotal 17,000</div>
+  <div class="delivery-fee">+ Delivery fee 3,000</div>
+  <div class="total">= Total 20,000</div>
+</div>
+<style>
+  .total-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
 
-    <div class="product">
-      <span>상품 1</span>
-      <div class="quantity-input">
-        <input type="number" min="1" value="1" data-product-id="1">
-        <button onclick="changeQuantity(this, 'decrease')">-</button>
-        <button onclick="changeQuantity(this, 'increase')">+</button>
-      </div>
-    </div>
+.subtotal,
+.delivery-fee,
+.total {
+  flex: 1;
+  text-align: center;
+}
 
-    <div class="product">
-      <span>상품 2</span>
-      <div class="quantity-input">
-        <input type="number" min="1" value="1" data-product-id="2">
-        <button onclick="changeQuantity(this, 'decrease')">-</button>
-        <button onclick="changeQuantity(this, 'increase')">+</button>
-      </div>
-    </div>
-
-    <div class="button-container">
-      <button onclick="calculateTotal()">결제하기</button>
-    </div>
-
-    <div id="message"></div>
-    <div id="payment-result" class="payment-result"></div>
-  </div>
-
-  <script>
-    // JavaScript 로직
-    function changeQuantity(button, action) {
-      var input = button.parentNode.querySelector('input');
-      var value = parseInt(input.value);
-
-      if (action === 'increase') {
-        value += 1;
-      } else if (action === 'decrease') {
-        if (value > 1) {
-          value -= 1;
-        }
-      }
-
-      input.value = value;
-    }
-
-    function calculateTotal() {
-      var products = document.querySelectorAll('.product');
-      var total = 0;
-
-      products.forEach(function(product) {
-        var quantityInput = product.querySelector('input');
-        var quantity = parseInt(quantityInput.value);
-        var price = 10; // 각 상품의 가격을 10으로 가정
-
-        total += quantity * price;
-      });
-
-      displayMessage('총 결제 금액: $' + total);
-
-      var paymentResult = document.getElementById('payment-result');
-      paymentResult.textContent = '총 결제 금액: $' + total;
-      paymentResult.classList.add('show');
-    }
-
-    function displayMessage(message) {
-      var messageElement = document.getElementById('message');
-      messageElement.textContent = message;
-    }
-  </script>
-</body>
-</html>
+</style>
