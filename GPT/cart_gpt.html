@@ -13,10 +13,10 @@
 
         /* 테이블 구조 CSS */
         table {
-            border-bottom: 1px solid black;
-            border-collapse: collapse;
+            border-radius: 8px;
             width: 70%;
             font-weight: bold;
+            background-color: rgb(212, 231, 238);
         }
 
         /* 테이블 아래 선 색상 및 가운데 정렬 */
@@ -424,7 +424,8 @@
                         <th class="select_product">
                             <label id="select_all_label" for="select_all">
                                 <div>
-                                    <input id="select_all" type="checkbox">
+                                    <input title="모든 상품 선택" type="checkbox" id="select_all" name="select_all"
+                                        class="select_all_product" checked>
                                 </div>
                                 <div style="padding-left: 10px;">
                                     <span>Select</span>
@@ -439,7 +440,9 @@
                     <tbody>
                         <!-- 상품 1 -->
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td>
+                                <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
+                            </td>
                             <td>
                                 <div class="product_info_container">
                                     <div class="product_image_container">
@@ -449,10 +452,10 @@
                                     </div>
                                     <div class="product_text_container">
                                         <div class="product_korean_name">
-                                            <span>아톰 하트 마더</span>
+                                            <span class="product_korean_name_text">아톰 하트 마더</span>
                                         </div>
                                         <div class="product_english_name">
-                                            <span>Atomheartmother</span>
+                                            <span class="product_english_name_text">Atom heart mother</span>
                                         </div>
                                         <p class="product_description">
                                             매혹적인 샌달우드, 자스민 그리고 관능적인 장미의 향연!
@@ -461,12 +464,10 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="product_price">14,000</span>
+                                <span class="product_price_text">10,000</span>
                             </td>
                             <td>
                                 <span class="product_amount_text">1</span>
-                                <!-- <button id="plus_product_2" class="btn product_plus_amount">⬆</button> -->
-                                <!-- <button id="minus_product_2" class="btn product_minus_amount">⬇</button> -->
                             </td>
                             <td>
                                 <div class="edit_btn_container">
@@ -481,20 +482,21 @@
                         </tr>
                         <!-- 상품 2 -->
                         <tr>
-                            <td><input type="checkbox"></td>
+                            <td>
+                                <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
+                            </td>
                             <td>
                                 <div class="product_info_container">
                                     <div class="product_image_container">
-                                        <img class="product_image"
-                                            src="../HTML_KOSA/Project/Image/assets/avobath.png"
+                                        <img class="product_image" src="../HTML_KOSA/Project/Image/assets/avobath.png"
                                             alt="product_image">
                                     </div>
                                     <div class="product_text_container">
                                         <div class="product_korean_name">
-                                            <span>아보 배쓰</span>
+                                            <span class="product_korean_name_text">아보 배쓰</span>
                                         </div>
                                         <div class="product_english_name">
-                                            <span>Avobath</span>
+                                            <span class="product_english_name_text">Avobath</span>
                                         </div>
                                         <p class="product_description">
                                             싱그러운 페퍼민트와 자몽이 입욕에 상쾌함을!
@@ -503,12 +505,10 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="product_price">20,000</span>
+                                <span class="product_price_text">15,000</span>
                             </td>
                             <td>
-                                <span class="product_amount_text">5</span>
-                                <!-- <button id="plus_product_2" class="btn product_plus_amount">⬆</button> -->
-                                <!-- <button id="minus_product_2" class="btn product_minus_amount">⬇</button> -->
+                                <span class="product_amount_text">2</span>
                             </td>
                             <td>
                                 <div class="edit_btn_container">
@@ -521,11 +521,88 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr></tr>
                         <!-- 상품 3 -->
-                        <tr></tr>
+                        <tr>
+                            <td>
+                                <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
+                            </td>
+                            <td>
+                                <div class="product_info_container">
+                                    <div class="product_image_container">
+                                        <img class="product_image" src="../HTML_KOSA/Project/Image/assets/bigblue.png"
+                                            alt="product_image">
+                                    </div>
+                                    <div class="product_text_container">
+                                        <div class="product_korean_name">
+                                            <span class="product_korean_name_text">빅 블루<span>
+                                        </div>
+                                        <div class="product_english_name">
+                                            <span class="product_english_name_text">Big Blue</span>
+                                        </div>
+                                        <p class="product_description">
+                                            자스민, 클레리, 일랑일랑 꽃이 가득!
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="product_price_text">20,000</span>
+                            </td>
+                            <td>
+                                <span class="product_amount_text">3</span>
+                            </td>
+                            <td>
+                                <div class="edit_btn_container">
+                                    <div>
+                                        <button class="edit_btn edit_amount_button">Edit</button>
+                                    </div>
+                                    <div>
+                                        <button class="edit_btn">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                         <!-- 상품 4 -->
-                        <tr></tr>
+                        <tr>
+                            <td>
+                                <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
+                            </td>
+                            <td>
+                                <div class="product_info_container">
+                                    <div class="product_image_container">
+                                        <img class="product_image" src="../HTML_KOSA/Project/Image/assets/blackrose.png"
+                                            alt="product_image">
+                                    </div>
+                                    <div class="product_text_container">
+                                        <div class="product_korean_name">
+                                            <span class="product_korean_name_text">블랙 로즈<span>
+                                        </div>
+                                        <div class="product_english_name">
+                                            <span class="product_english_name_text">Black Rose</span>
+                                        </div>
+                                        <p class="product_description">
+                                            설레임으로 가득 찬 꽃향기를 느껴보세요!
+                                        </p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="product_price_text">25,000</span>
+                            </td>
+                            <td>
+                                <span class="product_amount_text">4</span>
+                            </td>
+                            <td>
+                                <div class="edit_btn_container">
+                                    <div>
+                                        <button class="edit_btn edit_amount_button">Edit</button>
+                                    </div>
+                                    <div>
+                                        <button class="edit_btn">Delete</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -574,20 +651,20 @@
 <div class="quantity_modal" id="quantity_modal">
     <div class="modal_content">
         <div class="product_details">
-            <img src="../HTML_KOSA/Project/Image/assets/atomheartmother.png" alt="Product Image">
+            <img id="product_image_modal" src="" alt="Product Image">
             <div class="product_info">
                 <div>
-                    <h2 id="product_korean_name_modal">Atomheartmother</h2>
-                    <h4 id="product_english_name_modal">Atomheartmother</h4>
+                    <h2 id="product_korean_name_modal"></h2>
+                    <h4 id="product_english_name_modal"></h4>
                 </div>
-                <p class="product_price_text">상품 가격&nbsp;&nbsp;<span id="product_price_modal"></span></p>
+                <p class="product_price_text_modal">상품 가격&nbsp;&nbsp;<span id="product_price_modal"></span></p>
             </div>
         </div>
         <div class="input_group">
             <label for="quantity">현재 수량</label>
             <div class="quantity_input">
                 <button class="quantity_button" id="decreaseBtn">-</button>
-                <input type="text" id="quantity" value="1">
+                <input type="text" id="quantity" name="quantity" value="1">
                 <button class="quantity_button" id="increaseBtn">+</button>
             </div>
         </div>
@@ -606,29 +683,73 @@
 </div>
 
 <script>
-    // 상품 수정 버튼
-    // const buttons = [...document.getElementsByTagName('button')];
-    // const changeAmount = (event) => {
-    //     const buttonName = event.target.textContent;
-    //     const tableRow = event.target.parentNode.parentNode.parentNode.parentNode
-    //     // Edit 버튼을 눌렀을 경우
-    //     if (buttonName == 'Edit') {
-    //         console.log('a')
+    window.onload = () => {
+        totalPrice();
+    }
 
-    //     }
-    //     // Delete 버튼을 눌렀을 경우
-    //     else if (buttonName == 'Delete') {
-    //         tableRow.innerHTML = '';
-    //         console.log(tableRow.innerHTML);
-    //     }
+    // 상품 Edit 버튼
+    const editButtons = document.querySelectorAll('.edit_btn');
+    editButtons.forEach((button) => {
+        const clickHandler = (event) => {
+            const buttonName = event.target.textContent;
+            var tableRow = event.target.closest('tr');
+            console.log(tableRow);
+            if (buttonName == 'Edit') {
+                modalCancelBtn();
+                modalUpdateButton(tableRow);
+            } else if (buttonName == 'Delete') {
+                var checkBoxStatus = tableRow.querySelector('.product_checkbox');
+                if (checkBoxStatus.checked) {
+                    // tableRow.style.backgroundColor = "red";
+                    tableRow.style.collapse = "collapse";
+                    tableRow.remove();
+                    totalPrice();
+                }
+            }
+        };
 
-    //     console.log(tableRow.children[3]);
-    //     // tableRow.children[0] = checkbox
-    //     // [1] = productInfo, [2] = price, [3] = amount, [4] = edit
-    // }
-    // buttons.forEach((clickButton) => {
-    //     clickButton.addEventListener('click', changeAmount);
-    // })
+        button.removeEventListener('click', clickHandler); // Remove any existing event listeners
+
+        button.addEventListener('click', clickHandler);
+    });
+
+    // 수정 버튼 클릭시 수정 반영
+    const modalUpdateButton = (tableRow) => {
+        const eventTarget = tableRow;
+        var quantity = 0;
+
+        const updateButton = document.getElementById('updateBtn');
+
+        // Check if the event listener has already been added
+        const hasEventListener = updateButton.hasAttribute('data-has-event-listener');
+
+        if (!hasEventListener) {
+            // Add a flag to indicate that the event listener has been added
+            updateButton.setAttribute('data-has-event-listener', 'true');
+
+            // Add the click event listener
+            updateButton.addEventListener('click', updateButtonClickHandler);
+        }
+
+        function updateButtonClickHandler(event) {
+            const quantityInput = document.getElementById('quantity');
+            quantity = parseInt(quantityInput.value);
+            // 수량 변경에 따른 로직 추가
+            console.log(quantity);
+            console.log(eventTarget);
+            var changedAmount = eventTarget.querySelector('.product_amount_text');
+            changedAmount.textContent = quantity;
+
+            const modal = document.getElementById('quantity_modal');
+            modal.style.display = 'none';
+
+            // Remove the flag after the update is done
+            updateButton.removeAttribute('data-has-event-listener');
+            // Remove the event listener
+            updateButton.removeEventListener('click', updateButtonClickHandler);
+            totalPrice();
+        }
+    };
 
     // Modal 관련 로직
     // 주문 확인 Modal
@@ -641,47 +762,45 @@
     }
 
     function redirectToPayment() {
-        window.location.href = '../payments/payments.html';
+        window.location.href = '../../HTML_KOSA/Project/payments/payments.html';
         console.log('결제 페이지로 이동');
     }
 
-    const modalButtons = document.querySelectorAll('.edit_amount_button');
-    modalButtons.forEach(button => {
+    // Edit 버튼 클릭시 값들을 modal에 저장하는 로직
+    const editModalButtons = document.querySelectorAll('.edit_amount_button');
+    editModalButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             const modal = document.getElementById('quantity_modal');
-            
-            // 상품 체크 확인
-            let checkProduct = event.target.parentNode.parentNode.parentNode.parentNode.children[0].children[0].checked;
-            console.log(checkProduct);
-            
-            // 버튼을 누른 상품의 상세 정보
-            const productDetails = event.target.parentNode.parentNode.parentNode.parentNode.children[1].innerHTML;
+            const tableRow = event.target.closest('tr');
+
+            // 상품 이미지
+            const productImage = tableRow.querySelector('.product_image').src;
+            const productImageModal = document.querySelector('#product_image_modal');
+            productImageModal.setAttribute("src", `${productImage}`);
 
             // 상품 이름 
-            const productKoreanName = event.target.parentNode.parentNode.parentNode.parentNode.children[1].children[0].children[1].children[0].children[0].innerHTML;
-            const productEnglishName = event.target.parentNode.parentNode.parentNode.parentNode.children[1].children[0].children[1].children[1].children[0].innerHTML;
-            
+            const productKoreanName = tableRow.querySelector('.product_korean_name_text').textContent;
+            const productEnglishName = tableRow.querySelector('.product_english_name_text').textContent;
+
             let productKoreanNameModal = document.getElementById('product_korean_name_modal');
             productKoreanNameModal.innerHTML = productKoreanName;
 
             let productEnglishNameModal = document.getElementById('product_english_name_modal');
             productEnglishNameModal.innerHTML = productEnglishName;
+
+            // 상품 체크 확인
+            let checkProduct = tableRow.querySelector('.product_checkbox').checked;
+
             // 버튼을 누른 상품의 가격
-            
-            const productPrice = event.target.parentNode.parentNode.parentNode.parentNode.children[2].children[0].innerHTML;
+            const productPrice = tableRow.querySelector('.product_price_text').textContent;
             const productPriceModal = document.getElementById('product_price_modal');
             productPriceModal.innerHTML = productPrice;
-            console.log(productPrice);
 
             // 버튼을 누른 상품의 수량
-            const productAmount = event.target.parentNode.parentNode.parentNode.parentNode.children[3].children[0].innerHTML;
-            
-            const productDetailElement = document.getElementsByClassName('product_details');
-            // console.log(productDetails);
-            console.log(productDetailElement[0]);
+            const productAmount = tableRow.querySelector('.product_amount_text').textContent;
+
 
             let modalProductQuantity = document.getElementById('quantity');
-            console.log(modalProductQuantity);
             modalProductQuantity.value = productAmount;
 
             modal.style.display = 'flex';
@@ -689,10 +808,13 @@
     });
 
     // 취소 버튼 클릭 시 모달 창 닫기
-    document.getElementById('cancelBtn').addEventListener('click', (event) => {
-        const modal = document.getElementById('quantity_modal');
-        modal.style.display = 'none';
-    });
+    const modalCancelBtn = () => {
+        document.getElementById('cancelBtn').addEventListener('click', (event) => {
+            const modal = document.getElementById('quantity_modal');
+            modal.style.display = 'none';
+        })
+    }
+
 
     // 상품 수량 증가 버튼 클릭 시
     document.getElementById('increaseBtn').addEventListener('click', (event) => {
@@ -700,7 +822,7 @@
         const currentValue = parseInt(quantityInput.value);
         const newValue = currentValue + 1;
         quantityInput.value = newValue;
-    });
+    })
 
     // 상품 수량 감소 버튼 클릭 시
     document.getElementById('decreaseBtn').addEventListener('click', (event) => {
@@ -710,18 +832,73 @@
         if (newValue >= 1) {
             quantityInput.value = newValue;
         }
-    });
+    })
 
-    // 수정 버튼 클릭 시 상품 수량 변경하기
-    document.getElementById('updateBtn').addEventListener('click', (t, event) => {
-        const quantityInput = document.getElementById('quantity');
-        const quantity = parseInt(quantityInput.value);
-        // 수량 변경에 따른 로직 추가
-        // ...
 
-        const modal = document.getElementById('quantity_modal');
-        modal.style.display = 'none';
-    });
+    // 전체 합 구하기
+    const totalPrice = () => {
+        var productCheckedList = document.querySelectorAll('input[name="product_checkbox"]:checked');
+        var deliveryFee = 0;
+        var total = 0;
+        if (productCheckedList.length == 0) {
+            document.getElementById('sub_total').textContent = total.toLocaleString();
+            document.getElementById('delivery_fee').textContent = deliveryFee;
+            document.getElementById('total').textContent = total.toLocaleString();
+            return;
+        }
+        productCheckedList.forEach((productChecked) => {
+            const tableRow = productChecked.closest('tr');
+
+            var productPrice = tableRow.querySelector('.product_price_text').textContent;
+            var productAmount = tableRow.querySelector('.product_amount_text').textContent;
+
+            total += parseInt(productPrice.replace(/,/g, '')) * parseInt(productAmount.replace(/,/g, ''));
+        })
+
+        document.getElementById('sub_total').textContent = total.toLocaleString();
+        if (total >= 50000) {
+            document.getElementById('delivery_fee').textContent = deliveryFee;
+            document.getElementById('total').textContent = total.toLocaleString();
+        }
+        else if (total < 50000 && total > 0) {
+            deliveryFee = 3000;
+            document.getElementById('delivery_fee').textContent = deliveryFee.toLocaleString();
+            document.getElementById('total').textContent = (total + deliveryFee).toLocaleString();
+        }
+    }
+
+    // 전체 선택
+    document.querySelector('#select_all_label').addEventListener('click', (event) => {
+        const selectBox = event.target;
+        const checkBoxes = document.getElementsByName('product_checkbox');
+        checkBoxes.forEach((checkBox) => {
+            checkBox.checked = selectBox.checked;
+        })
+        totalPrice();
+    })
+
+    // 상품 선택
+    const productCheckBoxes = document.querySelectorAll(".product_checkbox");
+    productCheckBoxes.forEach((productCheckBox) => {
+        productCheckBox.addEventListener('click', (event) => {
+            // 모든 체크박스
+            const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
+
+            // 선택된 체크박스
+            const checked = document.querySelectorAll('input[name="product_checkbox"]:checked');
+
+            // 전체 선택 체크박스
+            const selectAll = document.querySelector('input[name="select_all"]');
+
+            // 전체 상품이 체크되어 있으면
+            if (checkBoxes.length == checked.length) {
+                selectAll.checked = true;
+            } else {
+                selectAll.checked = false;
+            }
+            totalPrice();
+        })
+    })
 </script>
 
 </html>
