@@ -48,7 +48,6 @@ function generateCalendar() {
         emptyCell.classList.add('calendar-cell', 'empty');
         calendarRow.appendChild(emptyCell);
     }
-
     // 날짜 채우기
     for (let i = firstDayOfWeek; i < 7; i++) {
         const calendarCell = document.createElement('div');

@@ -266,7 +266,8 @@
         }
 
         /* 주문하기 모달 */
-        .modal {
+        .modal,
+        .delete_modal {
             background: #fff;
             border-radius: 4px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -280,7 +281,8 @@
             transform: translate(-50%, -50%);
         }
 
-        .modal h2 {
+        .modal h2,
+        .delete_modal h2 {
             margin-top: 0;
         }
 
@@ -297,21 +299,25 @@
             cursor: pointer;
         }
 
-        .modal-buttons button.yes {
+        .modal-buttons button.yes,
+        .modal-buttons button.delete_yes {
             background: #df66df;
             color: #fff;
         }
 
-        .modal-buttons button.yes:hover {
+        .modal-buttons button.yes:hover,
+        .modal-buttons button.delete_yes:hover {
             background: #de52de;
         }
 
-        .modal-buttons button.no {
+        .modal-buttons button.no,
+        .modal-buttons button.delete_no {
             background: #9e32c5;
             color: #fff;
         }
 
-        .modal-buttons button.no:hover {
+        .modal-buttons button.no:hover,
+        .modal-buttons button.delete_no:hover {
             background: #9a1ec7;
         }
 
@@ -476,7 +482,7 @@
                                         <button class="edit_btn edit_amount_button">Edit</button>
                                     </div>
                                     <div>
-                                        <button class="edit_btn">Delete</button>
+                                        <button class="edit_btn edit_delete_button">Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -517,7 +523,7 @@
                                         <button class="edit_btn edit_amount_button">Edit</button>
                                     </div>
                                     <div>
-                                        <button class="edit_btn">Delete</button>
+                                        <button class="edit_btn edit_delete_button">Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -558,7 +564,7 @@
                                         <button class="edit_btn edit_amount_button">Edit</button>
                                     </div>
                                     <div>
-                                        <button class="edit_btn">Delete</button>
+                                        <button class="edit_btn edit_delete_button">Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -599,7 +605,7 @@
                                         <button class="edit_btn edit_amount_button">Edit</button>
                                     </div>
                                     <div>
-                                        <button class="edit_btn">Delete</button>
+                                        <button class="edit_btn edit_delete_button">Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -648,6 +654,7 @@
         </div>
     </div>
 </body>
+
 <!-- 상품 수정 Modal -->
 <div class="quantity_modal" id="quantity_modal">
     <div class="modal_content">
@@ -673,6 +680,17 @@
         <button id="cancelBtn">취소</button>
     </div>
 </div>
+
+<!-- 삭제 확인 Modal -->
+<div id="delete_modal" class="delete_modal hidden">
+    <h2>삭제 확인</h2>
+    <p>상품을 삭제하시겠습니까?</p>
+    <div class="modal-buttons">
+        <button class="delete_yes">예</button>
+        <button class="delete_no" onclick="closeDeleteModal()">아니오</button>
+    </div>
+</div>
+
 <!-- 주문 확인 Modal -->
 <div id="modal" class="modal hidden">
     <h2>주문 확인</h2>
@@ -694,16 +712,16 @@
         const clickHandler = (event) => {
             const buttonName = event.target.textContent;
             var tableRow = event.target.closest('tr');
-            console.log(tableRow);
             if (buttonName == 'Edit') {
                 modalCancelBtn();
-                modalUpdateButton(tableRow);
+                updateAmountBtn(tableRow);
             } else if (buttonName == 'Delete') {
                 var checkBoxStatus = tableRow.querySelector('.product_checkbox');
                 if (checkBoxStatus.checked) {
-                    // tableRow.style.backgroundColor = "red";
-                    tableRow.style.collapse = "collapse";
-                    tableRow.remove();
+                    // openDeleteModal();
+                    if (false) {
+                        tableRow.remove();
+                    }
                     totalPrice();
                 }
             }
@@ -715,7 +733,7 @@
     });
 
     // 수정 버튼 클릭시 수정 반영
-    const modalUpdateButton = (tableRow) => {
+    const updateAmountBtn = (tableRow) => {
         const eventTarget = tableRow;
         var quantity = 0;
 
@@ -736,8 +754,6 @@
             const quantityInput = document.getElementById('quantity');
             quantity = parseInt(quantityInput.value);
             // 수량 변경에 따른 로직 추가
-            console.log(quantity);
-            console.log(eventTarget);
             var changedAmount = eventTarget.querySelector('.product_amount_text');
             changedAmount.textContent = quantity;
 
@@ -752,6 +768,38 @@
         }
     };
 
+    // 삭제 확인 Modal
+    const tableRows = document.querySelectorAll("tr");
+    tableRows.forEach((tableRow) => {
+        tableRow.addEventListener('click', (event) => {
+            console.log(event.target);
+            if (event.target.innerHTML === 'Delete') {
+                openDeleteModal();
+                const deleteProductBtn = document.querySelector('.delete_yes');
+                console.log(deleteProductBtn);
+                deleteProductBtn.addEventListener('click', () => {
+                    // 삭제 버튼 클릭 시 실행할 코드 작성
+                    tableRow.remove();
+                    closeDeleteModal();
+                });
+            }
+        });
+    });
+
+
+    // 삭제 확인 Modal 열기
+    function openDeleteModal() {
+        document.getElementById('delete_modal').classList.remove('hidden');
+    }
+    // 삭제 확인 Modal 닫기
+    function closeDeleteModal() {
+        document.getElementById('delete_modal').classList.add('hidden');
+    }
+    function deletProduct() {
+
+
+        closeDeleteModal();
+    }
     // Modal 관련 로직
     // 주문 확인 Modal
     function openModal() {
@@ -767,10 +815,11 @@
         console.log('결제 페이지로 이동');
     }
 
+
     // Edit 버튼 클릭시 값들을 modal에 저장하는 로직
     const editModalButtons = document.querySelectorAll('.edit_amount_button');
     editModalButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
+        const modalProductInfo = (evnet) => {
             const modal = document.getElementById('quantity_modal');
             const tableRow = event.target.closest('tr');
 
@@ -800,12 +849,13 @@
             // 버튼을 누른 상품의 수량
             const productAmount = tableRow.querySelector('.product_amount_text').textContent;
 
-
             let modalProductQuantity = document.getElementById('quantity');
             modalProductQuantity.value = productAmount;
 
             modal.style.display = 'flex';
-        });
+        }
+        button.removeEventListener('click', modalProductInfo);
+        button.addEventListener('click', modalProductInfo);
     });
 
     // 취소 버튼 클릭 시 모달 창 닫기
@@ -815,7 +865,6 @@
             modal.style.display = 'none';
         })
     }
-
 
     // 상품 수량 증가 버튼 클릭 시
     document.getElementById('increaseBtn').addEventListener('click', (event) => {
@@ -834,7 +883,6 @@
             quantityInput.value = newValue;
         }
     })
-
 
     // 전체 합 구하기
     const totalPrice = () => {
