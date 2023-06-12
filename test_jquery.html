@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#register-form").submit(function(event) {
+        event.preventDefault(); // 폼의 기본 동작을 막음
+
+        var username = $("#username").val();
+        var password = $("#password").val();
+
+        $.ajax({
+          url: "register.jsp", // 회원가입을 처리하는 JSP 파일의 경로
+          method: "POST", // HTTP 요청 메소드 (POST)
+          data: { username: username, password: password },
+          success: function(data) {
+            // 회원가입 성공 시 처리 로직
+            alert("Registration successful.");
+          },
+          error: function() {
+            // 회원가입 실패 시 처리 로직
+            alert("Registration failed.");
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>User Registration</h1>
+  <form id="register-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br>
+
+    <input type="submit" value="Register">
+  </form>
+</body>
+</html>

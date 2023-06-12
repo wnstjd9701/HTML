@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(() => {
+            $("input[type='button']").click(() => {
+                $.get("res.jsp", (data, status) => {
+                    var oldValue = $('#result').text();
+                    $('#result').text(oldValue + " " + data);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" value="요청">
+    <div id="result"></div>
+</body>
+</html>

@@ -9,6 +9,9 @@
         body {
             margin: 0 auto;
             width: auto;
+            background-color: #d3ebfb;
+            color: #050C32;
+            background: linear-gradient(to bottom, #d3ebfb 0%, #99c1de 50%, #d3ebfb 100%);
         }
 
         /* 테이블 구조 CSS */
@@ -17,7 +20,7 @@
             border-radius: 8px;
             width: 70%;
             font-weight: bold;
-            background-color: rgb(212, 231, 238);
+            background-color: #e0f5ff;
         }
 
         /* 테이블 아래 선 색상 및 가운데 정렬 */
@@ -25,7 +28,12 @@
         th,
         td {
             text-align: center;
-            border-bottom: 1px solid black;
+            border-bottom: 1px solid #00aeff;
+        }
+
+        tr:hover {
+            background-color: rgb(182, 192, 236);
+            transition: 2s ease;
         }
 
         /* 테이블 헤드 padding 으로 선과 떨어 뜨리기 위한 CSS */
@@ -37,6 +45,46 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        /* 체크박스 */
+        input[type="checkbox"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 16px;
+            outline: 0;
+            width: 16px;
+            transition: all 0.5s ease;
+        }
+
+        /* 체크 표시 스타일 */
+        input[type="checkbox"]::after {
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            content: "";
+            display: none;
+            height: 40%;
+            left: 40%;
+            position: relative;
+            top: 20%;
+            transform: rotate(45deg) scale(0);
+            transition: all 0.5s ease;
+            width: 15%;
+        }
+
+        /* 체크된 상태의 스타일 */
+        input[type="checkbox"]:checked {
+            background: #505bf0;
+        }
+
+        /* 호버 시 체크 표시 애니메이션 효과 */
+        input[type="checkbox"]::after {
+            display: block;
+            transform: rotate(45deg) scale(1);
         }
 
         /* 테이블 행 크기 조절 */
@@ -68,7 +116,8 @@
         /* 홈 로고 */
         .logo_container {
             display: flex;
-            height: 8em;
+            margin-top: 2em;
+            height: 5em;
             justify-content: center;
             align-items: center;
             /* margin: 1em 0; */
@@ -174,8 +223,8 @@
             margin-left: 15em;
             margin-right: 15em;
             padding: 10px;
-            border: 4px solid blueviolet;
-            border-radius: 8px;
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
             flex-wrap: wrap;
         }
 
@@ -200,7 +249,7 @@
         .edit_btn {
             margin: 10px;
             border-radius: 8px;
-            background-color: #a74caf;
+            background-color: #145293;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -214,6 +263,9 @@
 
         .edit_btn:hover {
             background-color: rgb(166, 7, 181);
+            transition: 1.5s ease;
+            border-radius: 20px;
+
         }
 
         /* 주문 버튼 CSS */
@@ -255,12 +307,10 @@
         }
 
         .order_button:hover span {
-
             padding-right: 25px;
         }
 
         .order_button:hover span:after {
-
             opacity: 1;
             right: 0;
         }
@@ -268,17 +318,30 @@
         /* 주문하기 모달 */
         .modal,
         .delete_modal {
+            position: fixed;
+            display: none;
+            z-index: 1000;
             background: #fff;
             border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             padding: 20px;
             max-width: 400px;
             width: 50%;
             text-align: center;
-            position: fixed;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
         }
 
         .modal h2,
@@ -301,28 +364,24 @@
 
         .modal-buttons button.yes,
         .modal-buttons button.delete_yes {
-            background: #df66df;
+            background: #a85ec2;
             color: #fff;
         }
 
         .modal-buttons button.yes:hover,
         .modal-buttons button.delete_yes:hover {
-            background: #de52de;
+            background: #9a1ec7;
         }
 
         .modal-buttons button.no,
         .modal-buttons button.delete_no {
-            background: #9e32c5;
+            background: #a85ec2;
             color: #fff;
         }
 
         .modal-buttons button.no:hover,
         .modal-buttons button.delete_no:hover {
             background: #9a1ec7;
-        }
-
-        .hidden {
-            display: none;
         }
 
         /* 상품 주문 모달 */
@@ -336,7 +395,7 @@
             display: none;
             align-items: center;
             justify-content: center;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .modal_content {
@@ -395,6 +454,8 @@
             width: 50px;
             text-align: center;
             font-size: 16px;
+            border: 1px solid rgb(192, 152, 227);
+            border-radius: 4px;
         }
 
         .quantity_input button {
@@ -405,13 +466,38 @@
             justify-content: center;
             align-items: center;
             border: none;
-            background-color: #d18efd;
+            background-color: #c36aff;
             cursor: pointer;
+        }
+
+        .quantity_input button:hover {
+            background-color: #a928ff;
         }
 
         .quantity_button {
             margin: 10px;
             border-radius: 4px;
+        }
+
+        .edit_update_container {
+            margin-bottom: 15px;
+        }
+
+        .modal_edit_btn {
+            border: 0.5px solid blueviolet;
+            border-radius: 4px;
+            background-color: #b789c7;
+            margin: 1em;
+            height: 2em;
+            width: 10em;
+        }
+
+        .modal_edit_btn:hover {
+            background-color: #a654c1;
+        }
+
+        #quantity:focus {
+            outline: 1px solid violet;
         }
     </style>
 </head>
@@ -420,7 +506,7 @@
     <div id="container">
         <div class="logo_container">
             <div class="logo_image">
-                <img id="home_logo_image" src="../HTML_KOSA/Project/Image/lion.png" alt="logoImage">
+                <a href="#"><img id="home_logo_image" src="../HTML_KOSA/Project/Image/Logo.png" alt="logoImage"></a>
             </div>
         </div>
         <div class="cart_container">
@@ -648,7 +734,7 @@
                     <button id="go_back_home_btn" class="order_button"><span>상품 더 둘러보기</span></button>
                 </div>
                 <div class="order_btn_div">
-                    <button class="order_button" onclick="openModal()"><span>Order</span></button>
+                    <button class="order_button" onclick="openOrderModal()"><span>Order</span></button>
                 </div>
             </div>
         </div>
@@ -676,30 +762,35 @@
                 <button class="quantity_button" id="increaseBtn">+</button>
             </div>
         </div>
-        <button id="updateBtn">수정</button>
-        <button id="cancelBtn">취소</button>
+        <div class="edit_update_container">
+            <button id="updateBtn" class="modal_edit_btn">수정</button>
+            <button id="cancelBtn" class="modal_edit_btn">취소</button>
+        </div>
     </div>
 </div>
 
 <!-- 삭제 확인 Modal -->
-<div id="delete_modal" class="delete_modal hidden">
+<div id="delete_modal" class="delete_modal">
     <h2>삭제 확인</h2>
     <p>상품을 삭제하시겠습니까?</p>
     <div class="modal-buttons">
         <button class="delete_yes">예</button>
-        <button class="delete_no" onclick="closeDeleteModal()">아니오</button>
+        <button class="delete_no">아니오</button>
     </div>
 </div>
 
 <!-- 주문 확인 Modal -->
-<div id="modal" class="modal hidden">
+<div id="modal" class="modal">
     <h2>주문 확인</h2>
     <p>결제 페이지로 이동하시겠습니까?</p>
     <div class="modal-buttons">
         <button class="yes" onclick="redirectToPayment()">예</button>
-        <button class="no" onclick="closeModal()">아니오</button>
+        <button class="no" onclick="closeOrderModal()">아니오</button>
     </div>
 </div>
+
+<!-- 주변이 클릭되지 않도록 하기 위한 div -->
+<div class="modal-overlay"></div>
 
 <script>
     window.onload = () => {
@@ -718,7 +809,6 @@
             } else if (buttonName == 'Delete') {
                 var checkBoxStatus = tableRow.querySelector('.product_checkbox');
                 if (checkBoxStatus.checked) {
-                    // openDeleteModal();
                     if (false) {
                         tableRow.remove();
                     }
@@ -772,49 +862,61 @@
     const tableRows = document.querySelectorAll("tr");
     tableRows.forEach((tableRow) => {
         tableRow.addEventListener('click', (event) => {
-            console.log(event.target);
-            if (event.target.innerHTML === 'Delete') {
-                openDeleteModal();
+            const isChecked = event.target.closest('tr').querySelector('input[name="product_checkbox"]');
+            if (event.target.innerHTML === 'Delete' && isChecked.checked) {
+                openDeleteProductModal();
                 const deleteProductBtn = document.querySelector('.delete_yes');
-                console.log(deleteProductBtn);
+                const noDeleteProductBtn = document.querySelector('.delete_no');
+                noDeleteProductBtn.addEventListener('click', () => {
+                    closeDeleteProductModal();
+                })
                 deleteProductBtn.addEventListener('click', () => {
                     // 삭제 버튼 클릭 시 실행할 코드 작성
                     tableRow.remove();
-                    closeDeleteModal();
+                    deletProduct();
+                    totalPrice();
                 });
+            }
+            else if (event.target.id === 'select_all') {
+                // #select_all 요소를 클릭한 경우의 동작 처리
+                const isSelectAllChecked = event.target.checked;
+                // 상품 체크박스를 모두 선택 또는 해제하는 코드 작성
+                // ...
+                // console.log(isSelectAllChecked);
             }
         });
     });
 
-
     // 삭제 확인 Modal 열기
-    function openDeleteModal() {
-        document.getElementById('delete_modal').classList.remove('hidden');
+    function openDeleteProductModal() {
+        document.getElementById('delete_modal').style.display = 'block';
+        document.querySelector(".modal-overlay").style.display = 'block';
     }
     // 삭제 확인 Modal 닫기
-    function closeDeleteModal() {
-        document.getElementById('delete_modal').classList.add('hidden');
+    function closeDeleteProductModal() {
+        document.getElementById('delete_modal').style.display = 'none';
+        document.querySelector(".modal-overlay").style.display = 'none';
     }
     function deletProduct() {
-
-
-        closeDeleteModal();
+        closeDeleteProductModal();
     }
+
     // Modal 관련 로직
     // 주문 확인 Modal
-    function openModal() {
-        document.getElementById('modal').classList.remove('hidden');
+    function openOrderModal() {
+        document.getElementById('modal').style.display = 'block';
+        document.querySelector(".modal-overlay").style.display = 'block';
     }
 
-    function closeModal() {
-        document.getElementById('modal').classList.add('hidden');
+    function closeOrderModal() {
+        document.getElementById('modal').style.display = 'none';
+        document.querySelector(".modal-overlay").style.display = 'none';
     }
 
     function redirectToPayment() {
         window.location.href = '../../HTML_KOSA/Project/payments/payments.html';
         console.log('결제 페이지로 이동');
     }
-
 
     // Edit 버튼 클릭시 값들을 modal에 저장하는 로직
     const editModalButtons = document.querySelectorAll('.edit_amount_button');
@@ -917,35 +1019,69 @@
     }
 
     // 전체 선택
-    document.querySelector('#select_all_label').addEventListener('click', (event) => {
-        const selectBox = event.target;
+    const selectAllCheck = (selectCheck) => {
         const checkBoxes = document.getElementsByName('product_checkbox');
-        checkBoxes.forEach((checkBox) => {
-            checkBox.checked = selectBox.checked;
+        checkBoxes.forEach(checkBox => {
+            checkBox.checked = selectCheck;
         })
         totalPrice();
-    })
+    }
+    const productCheckConfirm = () => {
+        const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
+
+        // 선택된 체크박스
+        const checked = document.querySelectorAll('input[name="product_checkbox"]:checked');
+
+        // 전체 선택 체크박스
+        const selectAll = document.querySelector('input[name="select_all"]');
+
+        // 전체 상품이 체크되어 있으면
+        if (checkBoxes.length == checked.length) {
+            selectAll.checked = true;
+        } else {
+            selectAll.checked = false;
+        }
+        totalPrice();
+    }
+
+    const productCheck = document.querySelectorAll('tr');
+    productCheck.forEach(product => {
+        product.addEventListener('click', event => {
+            const currentTarget = event.target;
+            const isChecked = currentTarget.closest('tr').querySelector('input[name="product_checkbox"]');
+            const tableHeader = currentTarget.closest('tr').querySelector('.select_product');
+            const text = currentTarget.textContent;
+            console.log(text);
+            // Edit 버튼이나 Delet 버튼을 눌렀을 경우
+            if(text == 'Edit' || text == 'Delete'){ return }
+            // header를 클릭했을 경우
+            if (tableHeader !== null) {
+                const selectBox = document.querySelector('input[name="select_all"]');
+                if (selectBox !== null) {
+                    selectBox.checked = !selectBox.checked; // 상태 반전
+
+                    // 모든 상품 체크박스에 선택 상태 적용
+                    const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
+                    checkBoxes.forEach(checkBox => {
+                        checkBox.checked = selectBox.checked;
+                    });
+                }
+            } else {
+                if (isChecked !== null) {
+                        isChecked.checked = !isChecked.checked; // 상태 반전}
+                    } else {
+                    }
+                }
+
+                productCheckConfirm();
+            });
+    });
 
     // 상품 선택
     const productCheckBoxes = document.querySelectorAll(".product_checkbox");
     productCheckBoxes.forEach((productCheckBox) => {
         productCheckBox.addEventListener('click', (event) => {
-            // 모든 체크박스
-            const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
-
-            // 선택된 체크박스
-            const checked = document.querySelectorAll('input[name="product_checkbox"]:checked');
-
-            // 전체 선택 체크박스
-            const selectAll = document.querySelector('input[name="select_all"]');
-
-            // 전체 상품이 체크되어 있으면
-            if (checkBoxes.length == checked.length) {
-                selectAll.checked = true;
-            } else {
-                selectAll.checked = false;
-            }
-            totalPrice();
+            productCheckConfirm();
         })
     })
 </script>
