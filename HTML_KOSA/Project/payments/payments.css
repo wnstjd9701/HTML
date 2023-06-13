@@ -3,7 +3,11 @@
 }
 
 body {
-    background-color: #f2faff;
+    margin: 0 auto;
+    width: auto;
+    background-color: #d3ebfb;
+    color: #050C32;
+    background: linear-gradient(to bottom, #d3ebfb 0%, #99c1de 50%, #d3ebfb 100%);
 }
 
 #container {

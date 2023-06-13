@@ -1,131 +1,252 @@
 window.onload = () => {
-    totalPriceCalculate();
-}
-const addAmount = (event) => {
-    // const productsList = document.getElementsByClassName("table_row");
-    // console.log(productsList.length); // 다음에 추가할 때 product_(length+1)
-    const btnId = event.target.id.split('_');
-    const productId = btnId[2];
-    
-    const amount = document.getElementById(`product_amount_${productId}`);
-
-    const checkBox = document.querySelectorAll("input[name=product]");
-    // 체크가 안되어 있는데 상품 수량을 변경할 경우 체크 해줌 / 상품 인덱스는 1부터 시작하므로 checkBox의 인덱스는 productId - 1
-    if (checkBox[productId - 1].checked === false) {
-        checkBox[productId - 1].checked = true;
-        checkSelectAll();
-    }
-    amount.innerHTML = parseInt(amount.innerHTML) + 1;
-    // 총 금액 변경
-    totalPriceCalculate();
+    totalPrice();
 }
 
-const minusAmount = (event) => {
-    const btnId = event.target.id.split('_');
-    const productId = btnId[2];
-    
-    const amount = document.getElementById(`product_amount_${productId}`);
+// 수정 버튼 클릭시 수정 반영
+const updateAmountBtn = (tableRow) => {
+    const eventTarget = tableRow;
+    var quantity = 0;
 
-    const checkBox = document.querySelectorAll("input[name=product]");
-    // 체크가 안되어 있는데 상품 수량을 변경할 경우 체크 해줌 / 상품 인덱스는 1부터 시작하므로 checkBox의 인덱스는 productId - 1
-    if (checkBox[productId - 1].checked === false) {
-        checkBox[productId - 1].checked = true;
-        checkSelectAll();
+    const updateButton = document.getElementById('updateBtn');
+
+    updateButton.addEventListener('click', updateButtonClickHandler);
+
+    function updateButtonClickHandler(event) {
+        const quantityInput = document.getElementById('quantity');
+        quantity = parseInt(quantityInput.value);
+        // 수량 변경에 따른 로직 추가
+        var changedAmount = eventTarget.querySelector('.product_amount_text');
+        changedAmount.textContent = quantity;
+
+        const modal = document.getElementById('quantity_modal');
+        modal.style.display = 'none';
+
+        // Remove the flag after the update is done
+        // Remove the event listener
+        updateButton.removeEventListener('click', updateButtonClickHandler);
+        totalPrice();
     }
-    if (amount.innerHTML <= 0) {
-        alert("수량이 0보다 작습니다.");
-    }
-    else {
-        amount.innerHTML = parseInt(amount.innerHTML) - 1;
-        if (amount.innerHTML == 0) {
-            checkBox[productId - 1].checked = false;
-            checkSelectAll();
-        }
-        // 총 금액 변경
-        totalPriceCalculate();
-    }
+};
+
+// 삭제 확인 Modal 열기
+function openDeleteProductModal() {
+    document.getElementById('delete_modal').style.display = 'block';
+    document.querySelector(".modal-overlay").style.display = 'block';
+}
+// 삭제 확인 Modal 닫기
+function closeDeleteProductModal() {
+    document.getElementById('delete_modal').style.display = 'none';
+    document.querySelector(".modal-overlay").style.display = 'none';
 }
 
-const totalPriceCalculate = () => {
-    const productsList = document.getElementsByClassName("table_row");
+// Modal 관련 로직
+// 주문 확인 Modal
+function openOrderModal() {
+    document.getElementById('modal').style.display = 'block';
+    document.querySelector(".modal-overlay").style.display = 'block';
+}
 
-    let selectProductPrice = 0;
-    let checkBoxes = document.querySelectorAll("input[name=product]:checked");
-    checkBoxes.forEach((checkBox) => {
-        // 상품 아이디 가져오기
-        const productId = checkBox.id.split('_')[2];
+function closeOrderModal() {
+    document.getElementById('modal').style.display = 'none';
+    document.querySelector(".modal-overlay").style.display = 'none';
+}
 
-        let productPrice = productsList[productId - 1].children[5].innerHTML.split(/>|</)[2]
-        // productPrice.split(',').join('');
-        productPrice = productPrice.replace(/,/g, '');
+function redirectToPayment() {
+    window.location.href = '../../HTML_KOSA/Project/payments/payments.html';
+}
 
-        // 상품 수량 가져오기
-        let productAmount = document.getElementById(`product_amount_${productId}`);
+// 상품 Modal
+// Modal에 값을 동적으로 저장
+const modalProductInfo = (evnet) => {
+    const modal = document.getElementById('quantity_modal');
+    const tableRow = event.target.closest('tr');
 
-        // 총 금액 = 상품 수량 * 상품 가격
-        selectProductPrice += parseInt(productPrice) * parseInt(productAmount.innerHTML);
+    // 상품 이미지
+    const productImage = tableRow.querySelector('.product_image').src;
+    const productImageModal = document.querySelector('#product_image_modal');
+    productImageModal.setAttribute("src", `${productImage}`);
+
+    // 상품 이름 
+    const productKoreanName = tableRow.querySelector('.product_korean_name_text').textContent;
+    const productEnglishName = tableRow.querySelector('.product_english_name_text').textContent;
+
+    let productKoreanNameModal = document.getElementById('product_korean_name_modal');
+    productKoreanNameModal.innerHTML = productKoreanName;
+
+    let productEnglishNameModal = document.getElementById('product_english_name_modal');
+    productEnglishNameModal.innerHTML = productEnglishName;
+
+    // 상품 체크 확인
+    let checkProduct = tableRow.querySelector('.product_checkbox').checked;
+
+    // 버튼을 누른 상품의 가격
+    const productPrice = tableRow.querySelector('.product_price_text').textContent;
+    const productPriceModal = document.getElementById('product_price_modal');
+    productPriceModal.innerHTML = productPrice;
+
+    // 버튼을 누른 상품의 수량
+    const productAmount = tableRow.querySelector('.product_amount_text').textContent;
+
+    let modalProductQuantity = document.getElementById('quantity');
+    modalProductQuantity.value = productAmount;
+
+    modal.style.display = 'flex';
+}
+
+// 취소 버튼 클릭 시 모달 창 닫기
+const modalCancelBtn = () => {
+    document.getElementById('cancelBtn').addEventListener('click', (event) => {
+        const modal = document.getElementById('quantity_modal');
+        modal.style.display = 'none';
+    })
+}
+
+// 상품 수량 증가 버튼 클릭 시
+document.getElementById('increaseBtn').addEventListener('click', (event) => {
+    const quantityInput = document.getElementById('quantity');
+    const currentValue = parseInt(quantityInput.value);
+    const newValue = currentValue + 1;
+    quantityInput.value = newValue;
+})
+
+// 상품 수량 감소 버튼 클릭 시
+document.getElementById('decreaseBtn').addEventListener('click', (event) => {
+    const quantityInput = document.getElementById('quantity');
+    const currentValue = parseInt(quantityInput.value);
+    const newValue = currentValue - 1;
+    if (newValue >= 1) {
+        quantityInput.value = newValue;
+    }
+})
+
+// 전체 합 구하기
+const totalPrice = () => {
+    var productCheckedList = document.querySelectorAll('input[name="product_checkbox"]:checked');
+    var deliveryFee = 0;
+    var total = 0;
+    if (productCheckedList.length == 0) {
+        document.getElementById('sub_total').textContent = total.toLocaleString();
+        document.getElementById('delivery_fee').textContent = deliveryFee;
+        document.getElementById('total').textContent = total.toLocaleString();
+        return;
+    }
+    productCheckedList.forEach((productChecked) => {
+        const tableRow = productChecked.closest('tr');
+
+        var productPrice = tableRow.querySelector('.product_price_text').textContent;
+        var productAmount = tableRow.querySelector('.product_amount_text').textContent;
+
+        total += parseInt(productPrice.replace(/,/g, '')) * parseInt(productAmount.replace(/,/g, ''));
     })
 
-    // 배송비 
-    let deliveryFee = document.getElementById("delivery_fee");
-    if (selectProductPrice > 50000 || selectProductPrice == 0) {
-        deliveryFee.innerHTML = "0<span>&nbsp;\\</span>";
-    } else {
-        deliveryFee.innerHTML = "3,000<span>&nbsp;\\</span>";
+    document.getElementById('sub_total').textContent = total.toLocaleString();
+    if (total >= 50000) {
+        document.getElementById('delivery_fee').textContent = deliveryFee;
+        document.getElementById('total').textContent = total.toLocaleString();
     }
-
-    let subTotalPrice = document.getElementById("sub_total_price");
-    let totalPrice = document.getElementById("total_price");
-    subTotalPrice.innerHTML = selectProductPrice.toLocaleString() + "<span>&nbsp;\\</span>";
-    totalPrice.innerHTML = (parseInt(deliveryFee.innerHTML.split(',').join('')) + selectProductPrice).toLocaleString() + "<span>&nbsp;\\</span>";
+    else if (total < 50000 && total > 0) {
+        deliveryFee = 3000;
+        document.getElementById('delivery_fee').textContent = deliveryFee.toLocaleString();
+        document.getElementById('total').textContent = (total + deliveryFee).toLocaleString();
+    }
 }
 
-const checkSelectAll = () => {
-    // 모든 체크박스
-    const checkBoxes = document.querySelectorAll('input[name="product"]');
-
+// 상품 체크 확인
+const productCheckConfirm = () => {
+    const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
     // 선택된 체크박스
-    const checked = document.querySelectorAll('input[name="product"]:checked');
-
+    const checked = document.querySelectorAll('input[name="product_checkbox"]:checked');
     // 전체 선택 체크박스
-    const selectAll = document.querySelector('input[name="selectAll"]');
-
-    // 모든 체크박스(선택됨)와 선택된 체크박스의 길이가 같으면  
-    if (checkBoxes.length === checked.length) {
-        //전체 선택 체크박스 체크
+    const selectAll = document.querySelector('input[name="select_all"]');
+    // 전체 상품이 체크되어 있으면
+    if (checkBoxes.length == checked.length) {
         selectAll.checked = true;
     } else {
-        // 전체 선택 체크박스 해제
         selectAll.checked = false;
     }
-    totalPriceCalculate();
+    totalPrice();
 }
 
-const selectAll = (selectBox) => {
-    // selectBox 가 check 되어 있으면 true, 아니면 false
-    const checkBoxes = document.getElementsByName('product');
-    checkBoxes.forEach((checkBox) => {
+// 테이블 이벤트
+const tableEvent = (event) => {
+    event.stopPropagation();
+    const currentTarget = event.target;
+    let row = currentTarget.closest('tr');
+    console.log(currentTarget.tagName);
+    if (row.className === 'product_row' && (currentTarget.textContent == 'Edit' || currentTarget.textContent == 'Delete')) {
+        if (currentTarget.textContent == 'Edit') {
+            console.log('Edit');
+            modalProductInfo(event);
+            modalCancelBtn();
+            updateAmountBtn(row);
+        }
+        else if (currentTarget.textContent == 'Delete' && row.querySelector('input[type=checkbox]').checked === true) {
+            openDeleteProductModal();
+            var deleteProductBtn = document.querySelector('.delete_yes');
+            var noDeleteProductBtn = document.querySelector('.delete_no');
+
+            noDeleteProductBtn.addEventListener('click', (noDeleteEvent) => {
+                console.log(row);
+                row = '';
+                console.log(row);
+                closeDeleteProductModal()
+            });
+
+            deleteProductBtn.addEventListener('click', () => handleModalConfirm(row));
+        }
+    }
+    // INPUT 박스 클릭
+    else if (row.className === 'product_row' && currentTarget.tagName === 'INPUT') {
+        productCheckConfirm();
+    }
+    // TR 클릭
+    else if (row.className === 'product_row') {
+        if (row.querySelector('input[type=checkbox]').checked) {
+            row.querySelector('input[type=checkbox]').checked = false;
+        } else {
+            row.querySelector('input[type=checkbox]').checked = true;
+        }
+        productCheckConfirm();
+    }
+    else if (currentTarget.className == 'select_all_product') {
+        // select all 선택 event
+        var selectBox = row.querySelector('input[name="select_all"]');
+        selectAllProduct(selectBox);
+    }
+}
+
+const handleModalConfirm = (row) => {
+    // 모달 창 예 버튼 클릭 처리
+    row.remove();
+    // 모달 창 닫기
+    closeDeleteProductModal();
+    totalPrice();
+    // 모달 창 내 예 버튼 클릭 이벤트 해제
+    const modalButton = document.querySelector('.delete_no');
+    modalButton.removeEventListener('click', () => handleModalConfirm(row));
+};
+
+var table = document.querySelector('table');
+table.addEventListener('click', tableEvent);
+
+// 전체 상품 선택
+const selectAllProduct = (selectBox) => {
+    const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
+    checkBoxes.forEach(checkBox => {
         checkBox.checked = selectBox.checked;
-    })
-    totalPriceCalculate();
+    });
+}
+// 특정 상품 선택 
+const selectProduct = (checkbox) => {
+    checkbox.checked = !checkbox.checked;
 }
 
-const deleteSelectProduct = () => {
-    // 체크된 productList 가져오기
-    const checkedProductsList = document.querySelectorAll('input[name=product]:checked');
-    const productRowList = document.querySelectorAll(".table_row");
-    const productIdList = [];
-    // productId 가져오기
-    checkedProductsList.forEach((productInfo) => {
-        productIdList.push(productInfo.id.split('_')[2]);
-    })
-    productIdList.forEach((productId) => {
-        productRowList[productId-1].innerHTML = "";
-    })
-    totalPriceCalculate();
+// Edit 모달창 띄우기
+const editButtonClickHandler = (row) => {
+    console.log('hello');
 }
 
-const changeProductPrice = () => {
-    const orderPrices = document.querySelectorAll(".order_price");
-    console.log(orderPrices[0]);
+// Delete 모달창 띄우기
+const deleteButtonClickHandler = (row) => {
+
 }

@@ -31,14 +31,27 @@
             border-bottom: 1px solid #00aeff;
         }
 
-        tr:hover {
+        .product_row:hover {
             background-color: rgb(182, 192, 236);
             transition: 2s ease;
+        }
+
+        #select_all_label:hover {
+            background-color: rgb(182, 192, 236);
+            transition: 2s ease;
+            border-radius: 8px;
+            width: 120%;
         }
 
         /* 테이블 헤드 padding 으로 선과 떨어 뜨리기 위한 CSS */
         thead th {
             padding: 1.2em;
+        }
+
+        .select_all_input_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #select_all_label {
@@ -262,10 +275,9 @@
         }
 
         .edit_btn:hover {
-            background-color: rgb(166, 7, 181);
+            background-color: #523dc7;
             transition: 1.5s ease;
             border-radius: 20px;
-
         }
 
         /* 주문 버튼 CSS */
@@ -364,24 +376,26 @@
 
         .modal-buttons button.yes,
         .modal-buttons button.delete_yes {
-            background: #a85ec2;
+            background: #7061c6;
             color: #fff;
         }
 
         .modal-buttons button.yes:hover,
         .modal-buttons button.delete_yes:hover {
-            background: #9a1ec7;
+            background: #523dc7;
+            transition: 1s ease;
         }
 
         .modal-buttons button.no,
         .modal-buttons button.delete_no {
-            background: #a85ec2;
+            background: #7061c6;
             color: #fff;
         }
 
         .modal-buttons button.no:hover,
         .modal-buttons button.delete_no:hover {
-            background: #9a1ec7;
+            background: #523dc7;
+            transition: 1s ease;
         }
 
         /* 상품 주문 모달 */
@@ -466,12 +480,13 @@
             justify-content: center;
             align-items: center;
             border: none;
-            background-color: #c36aff;
+            background-color: #246fbe;
             cursor: pointer;
+            color: #fff;
         }
 
         .quantity_input button:hover {
-            background-color: #a928ff;
+            background-color: #0b63c2;
         }
 
         .quantity_button {
@@ -484,16 +499,17 @@
         }
 
         .modal_edit_btn {
-            border: 0.5px solid blueviolet;
+            color: #fff;
+            border: 0.5px solid #407ab8;
             border-radius: 4px;
-            background-color: #b789c7;
+            background-color: #407ab8;
             margin: 1em;
             height: 2em;
             width: 10em;
         }
 
         .modal_edit_btn:hover {
-            background-color: #a654c1;
+            background-color: #246fbe;
         }
 
         #quantity:focus {
@@ -516,7 +532,7 @@
                     <thead>
                         <th class="select_product">
                             <label id="select_all_label" for="select_all">
-                                <div>
+                                <div class="select_all_input_container">
                                     <input title="모든 상품 선택" type="checkbox" id="select_all" name="select_all"
                                         class="select_all_product" checked>
                                 </div>
@@ -532,7 +548,7 @@
                     </thead>
                     <tbody>
                         <!-- 상품 1 -->
-                        <tr>
+                        <tr class="product_row">
                             <td>
                                 <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
                             </td>
@@ -574,7 +590,7 @@
                             </td>
                         </tr>
                         <!-- 상품 2 -->
-                        <tr>
+                        <tr class="product_row">
                             <td>
                                 <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
                             </td>
@@ -615,7 +631,7 @@
                             </td>
                         </tr>
                         <!-- 상품 3 -->
-                        <tr>
+                        <tr class="product_row">
                             <td>
                                 <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
                             </td>
@@ -656,7 +672,7 @@
                             </td>
                         </tr>
                         <!-- 상품 4 -->
-                        <tr>
+                        <tr class="product_row">
                             <td>
                                 <input class="product_checkbox" name="product_checkbox" type="checkbox" checked>
                             </td>
@@ -798,29 +814,18 @@
     }
 
     // 상품 Edit 버튼
-    const editButtons = document.querySelectorAll('.edit_btn');
-    editButtons.forEach((button) => {
-        const clickHandler = (event) => {
-            const buttonName = event.target.textContent;
-            var tableRow = event.target.closest('tr');
-            if (buttonName == 'Edit') {
-                modalCancelBtn();
-                updateAmountBtn(tableRow);
-            } else if (buttonName == 'Delete') {
-                var checkBoxStatus = tableRow.querySelector('.product_checkbox');
-                if (checkBoxStatus.checked) {
-                    if (false) {
-                        tableRow.remove();
-                    }
-                    totalPrice();
-                }
-            }
-        };
-
-        button.removeEventListener('click', clickHandler); // Remove any existing event listeners
-
-        button.addEventListener('click', clickHandler);
-    });
+    // const editButtons = document.querySelectorAll('.edit_btn');
+    // editButtons.forEach((button) => {
+    //     const clickHandler = (event) => {
+    //         const buttonName = event.target.textContent;
+    //         var tableRow = event.target.closest('tr');
+    //         if (buttonName == 'Edit') {
+    //             updateAmountBtn(tableRow);
+    //         }
+    //     };
+    //     button.removeEventListener('click', clickHandler); // Remove any existing event listeners
+    //     button.addEventListener('click', clickHandler);
+    // });
 
     // 수정 버튼 클릭시 수정 반영
     const updateAmountBtn = (tableRow) => {
@@ -829,16 +834,7 @@
 
         const updateButton = document.getElementById('updateBtn');
 
-        // Check if the event listener has already been added
-        const hasEventListener = updateButton.hasAttribute('data-has-event-listener');
-
-        if (!hasEventListener) {
-            // Add a flag to indicate that the event listener has been added
-            updateButton.setAttribute('data-has-event-listener', 'true');
-
-            // Add the click event listener
-            updateButton.addEventListener('click', updateButtonClickHandler);
-        }
+        updateButton.addEventListener('click', updateButtonClickHandler);
 
         function updateButtonClickHandler(event) {
             const quantityInput = document.getElementById('quantity');
@@ -851,41 +847,11 @@
             modal.style.display = 'none';
 
             // Remove the flag after the update is done
-            updateButton.removeAttribute('data-has-event-listener');
             // Remove the event listener
             updateButton.removeEventListener('click', updateButtonClickHandler);
             totalPrice();
         }
     };
-
-    // 삭제 확인 Modal
-    const tableRows = document.querySelectorAll("tr");
-    tableRows.forEach((tableRow) => {
-        tableRow.addEventListener('click', (event) => {
-            const isChecked = event.target.closest('tr').querySelector('input[name="product_checkbox"]');
-            if (event.target.innerHTML === 'Delete' && isChecked.checked) {
-                openDeleteProductModal();
-                const deleteProductBtn = document.querySelector('.delete_yes');
-                const noDeleteProductBtn = document.querySelector('.delete_no');
-                noDeleteProductBtn.addEventListener('click', () => {
-                    closeDeleteProductModal();
-                })
-                deleteProductBtn.addEventListener('click', () => {
-                    // 삭제 버튼 클릭 시 실행할 코드 작성
-                    tableRow.remove();
-                    deletProduct();
-                    totalPrice();
-                });
-            }
-            else if (event.target.id === 'select_all') {
-                // #select_all 요소를 클릭한 경우의 동작 처리
-                const isSelectAllChecked = event.target.checked;
-                // 상품 체크박스를 모두 선택 또는 해제하는 코드 작성
-                // ...
-                // console.log(isSelectAllChecked);
-            }
-        });
-    });
 
     // 삭제 확인 Modal 열기
     function openDeleteProductModal() {
@@ -896,9 +862,6 @@
     function closeDeleteProductModal() {
         document.getElementById('delete_modal').style.display = 'none';
         document.querySelector(".modal-overlay").style.display = 'none';
-    }
-    function deletProduct() {
-        closeDeleteProductModal();
     }
 
     // Modal 관련 로직
@@ -915,50 +878,45 @@
 
     function redirectToPayment() {
         window.location.href = '../../HTML_KOSA/Project/payments/payments.html';
-        console.log('결제 페이지로 이동');
     }
 
-    // Edit 버튼 클릭시 값들을 modal에 저장하는 로직
-    const editModalButtons = document.querySelectorAll('.edit_amount_button');
-    editModalButtons.forEach(button => {
-        const modalProductInfo = (evnet) => {
-            const modal = document.getElementById('quantity_modal');
-            const tableRow = event.target.closest('tr');
+    // 상품 Modal
+    // Modal에 값을 동적으로 저장
+    const modalProductInfo = (evnet) => {
+        const modal = document.getElementById('quantity_modal');
+        const tableRow = event.target.closest('tr');
 
-            // 상품 이미지
-            const productImage = tableRow.querySelector('.product_image').src;
-            const productImageModal = document.querySelector('#product_image_modal');
-            productImageModal.setAttribute("src", `${productImage}`);
+        // 상품 이미지
+        const productImage = tableRow.querySelector('.product_image').src;
+        const productImageModal = document.querySelector('#product_image_modal');
+        productImageModal.setAttribute("src", `${productImage}`);
 
-            // 상품 이름 
-            const productKoreanName = tableRow.querySelector('.product_korean_name_text').textContent;
-            const productEnglishName = tableRow.querySelector('.product_english_name_text').textContent;
+        // 상품 이름 
+        const productKoreanName = tableRow.querySelector('.product_korean_name_text').textContent;
+        const productEnglishName = tableRow.querySelector('.product_english_name_text').textContent;
 
-            let productKoreanNameModal = document.getElementById('product_korean_name_modal');
-            productKoreanNameModal.innerHTML = productKoreanName;
+        let productKoreanNameModal = document.getElementById('product_korean_name_modal');
+        productKoreanNameModal.innerHTML = productKoreanName;
 
-            let productEnglishNameModal = document.getElementById('product_english_name_modal');
-            productEnglishNameModal.innerHTML = productEnglishName;
+        let productEnglishNameModal = document.getElementById('product_english_name_modal');
+        productEnglishNameModal.innerHTML = productEnglishName;
 
-            // 상품 체크 확인
-            let checkProduct = tableRow.querySelector('.product_checkbox').checked;
+        // 상품 체크 확인
+        let checkProduct = tableRow.querySelector('.product_checkbox').checked;
 
-            // 버튼을 누른 상품의 가격
-            const productPrice = tableRow.querySelector('.product_price_text').textContent;
-            const productPriceModal = document.getElementById('product_price_modal');
-            productPriceModal.innerHTML = productPrice;
+        // 버튼을 누른 상품의 가격
+        const productPrice = tableRow.querySelector('.product_price_text').textContent;
+        const productPriceModal = document.getElementById('product_price_modal');
+        productPriceModal.innerHTML = productPrice;
 
-            // 버튼을 누른 상품의 수량
-            const productAmount = tableRow.querySelector('.product_amount_text').textContent;
+        // 버튼을 누른 상품의 수량
+        const productAmount = tableRow.querySelector('.product_amount_text').textContent;
 
-            let modalProductQuantity = document.getElementById('quantity');
-            modalProductQuantity.value = productAmount;
+        let modalProductQuantity = document.getElementById('quantity');
+        modalProductQuantity.value = productAmount;
 
-            modal.style.display = 'flex';
-        }
-        button.removeEventListener('click', modalProductInfo);
-        button.addEventListener('click', modalProductInfo);
-    });
+        modal.style.display = 'flex';
+    }
 
     // 취소 버튼 클릭 시 모달 창 닫기
     const modalCancelBtn = () => {
@@ -1018,23 +976,13 @@
         }
     }
 
-    // 전체 선택
-    const selectAllCheck = (selectCheck) => {
-        const checkBoxes = document.getElementsByName('product_checkbox');
-        checkBoxes.forEach(checkBox => {
-            checkBox.checked = selectCheck;
-        })
-        totalPrice();
-    }
+    // 상품 체크 확인
     const productCheckConfirm = () => {
         const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
-
         // 선택된 체크박스
         const checked = document.querySelectorAll('input[name="product_checkbox"]:checked');
-
         // 전체 선택 체크박스
         const selectAll = document.querySelector('input[name="select_all"]');
-
         // 전체 상품이 체크되어 있으면
         if (checkBoxes.length == checked.length) {
             selectAll.checked = true;
@@ -1044,46 +992,87 @@
         totalPrice();
     }
 
-    const productCheck = document.querySelectorAll('tr');
-    productCheck.forEach(product => {
-        product.addEventListener('click', event => {
-            const currentTarget = event.target;
-            const isChecked = currentTarget.closest('tr').querySelector('input[name="product_checkbox"]');
-            const tableHeader = currentTarget.closest('tr').querySelector('.select_product');
-            const text = currentTarget.textContent;
-            console.log(text);
-            // Edit 버튼이나 Delet 버튼을 눌렀을 경우
-            if(text == 'Edit' || text == 'Delete'){ return }
-            // header를 클릭했을 경우
-            if (tableHeader !== null) {
-                const selectBox = document.querySelector('input[name="select_all"]');
-                if (selectBox !== null) {
-                    selectBox.checked = !selectBox.checked; // 상태 반전
+    // 테이블 이벤트
+    const tableEvent = (event) => {
+        event.stopPropagation();
+        const currentTarget = event.target;
+        let row = currentTarget.closest('tr');
+        console.log(currentTarget.tagName);
+        if (row.className === 'product_row' && (currentTarget.textContent == 'Edit' || currentTarget.textContent == 'Delete')) {
+            if (currentTarget.textContent == 'Edit') {
+                console.log('Edit');
+                modalProductInfo(event);
+                modalCancelBtn();
+                updateAmountBtn(row);
+            }
+            else if (currentTarget.textContent == 'Delete' && row.querySelector('input[type=checkbox]').checked === true) {
+                openDeleteProductModal();
+                var deleteProductBtn = document.querySelector('.delete_yes');
+                var noDeleteProductBtn = document.querySelector('.delete_no');
 
-                    // 모든 상품 체크박스에 선택 상태 적용
-                    const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
-                    checkBoxes.forEach(checkBox => {
-                        checkBox.checked = selectBox.checked;
-                    });
-                }
-            } else {
-                if (isChecked !== null) {
-                        isChecked.checked = !isChecked.checked; // 상태 반전}
-                    } else {
-                    }
-                }
+                noDeleteProductBtn.addEventListener('click', (noDeleteEvent) => {
+                    console.log(row);
+                    row = '';
+                    console.log(row);
+                    closeDeleteProductModal()
+                });
 
-                productCheckConfirm();
-            });
-    });
-
-    // 상품 선택
-    const productCheckBoxes = document.querySelectorAll(".product_checkbox");
-    productCheckBoxes.forEach((productCheckBox) => {
-        productCheckBox.addEventListener('click', (event) => {
+                deleteProductBtn.addEventListener('click', () => handleModalConfirm(row));
+            }
+        }
+        // INPUT 박스 클릭
+        else if (row.className === 'product_row' && currentTarget.tagName === 'INPUT') {
             productCheckConfirm();
-        })
-    })
+        }
+        // TR 클릭
+        else if (row.className === 'product_row') {
+            if (row.querySelector('input[type=checkbox]').checked) {
+                row.querySelector('input[type=checkbox]').checked = false;
+            } else {
+                row.querySelector('input[type=checkbox]').checked = true;
+            }
+            productCheckConfirm();
+        }
+        else if (currentTarget.className == 'select_all_product') {
+            // select all 선택 event
+            var selectBox = row.querySelector('input[name="select_all"]');
+            selectAllProduct(selectBox);
+        }
+    }
+    const handleModalConfirm = (row) => {
+        // 모달 창 예 버튼 클릭 처리
+        row.remove();
+        // 모달 창 닫기
+        closeDeleteProductModal();
+        totalPrice();
+        // 모달 창 내 예 버튼 클릭 이벤트 해제
+        const modalButton = document.querySelector('.delete_no');
+        modalButton.removeEventListener('click', () => handleModalConfirm(row));
+    };
+    var table = document.querySelector('table');
+    table.addEventListener('click', tableEvent);
+
+    // 전체 상품 선택
+    const selectAllProduct = (selectBox) => {
+        const checkBoxes = document.querySelectorAll('input[name="product_checkbox"]');
+        checkBoxes.forEach(checkBox => {
+            checkBox.checked = selectBox.checked;
+        });
+    }
+    // 특정 상품 선택 
+    const selectProduct = (checkbox) => {
+        checkbox.checked = !checkbox.checked;
+    }
+
+    // Edit 모달창 띄우기
+    const editButtonClickHandler = (row) => {
+        console.log('hello');
+    }
+
+    // Delete 모달창 띄우기
+    const deleteButtonClickHandler = (row) => {
+
+    }
 </script>
 
 </html>
