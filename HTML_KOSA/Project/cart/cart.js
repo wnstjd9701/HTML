@@ -186,9 +186,7 @@ const tableEvent = (event) => {
             var noDeleteProductBtn = document.querySelector('.delete_no');
 
             noDeleteProductBtn.addEventListener('click', (noDeleteEvent) => {
-                console.log(row);
                 row = '';
-                console.log(row);
                 closeDeleteProductModal()
             });
 
