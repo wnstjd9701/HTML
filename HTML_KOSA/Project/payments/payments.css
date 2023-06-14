@@ -249,7 +249,7 @@ p input::placeholder {
 
 .btn-find-postcode {
     padding: 8px 12px;
-    background-color: #b163d8;
+    background-color: #8b59ff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -258,11 +258,12 @@ p input::placeholder {
 }
 
 .btn-find-postcode:hover {
-    background-color: #a335da;
+    background-color: #6c2eff;
+    transition: 1s ease;
 }
 
 .address_input_box:focus+.btn-find-postcode {
-    background-color: #a335da;
+    background-color: #6c2eff;
 }
 
 .address_input_box::placeholder {
@@ -288,7 +289,7 @@ p input::placeholder {
 }
 
 .phone_number_input_box button {
-    background-color: #904cbe;
+    background-color: #8b59ff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -298,5 +299,9 @@ p input::placeholder {
 }
 
 .phone_number_input_box button:hover {
-    background-color: #b765c7;
+    background-color: #6c2eff;
+}
+
+.phone_number_input_box input:focus + .cert_phone_number{
+    background-color: #6c2eff;
 }

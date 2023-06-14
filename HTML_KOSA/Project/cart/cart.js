@@ -52,7 +52,7 @@ function closeOrderModal() {
 }
 
 function redirectToPayment() {
-    window.location.href = '../../HTML_KOSA/Project/payments/payments.html';
+    window.location.href = '../payments/payments.html';
 }
 
 // 상품 Modal
