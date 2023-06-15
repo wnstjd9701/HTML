@@ -4,17 +4,7 @@ window.onload = () => {
     speed: 200,
     waitUntilVisible: true,
   }).go();
-  // const productNameList = document.querySelectorAll('.product_name');
-  // console.log(productNameList);
-
-  // productNameList.forEach((productName) => {
-  //   console.log(productName.id);
-  //   new TypeIt(`#${productName.id}`, {
-  //     strings: `${productName.id}`,
-  //     speed: 200,
-  //     waitUntilVisible: true,
-  //   }).go();
-  // })
+  
   const productPriceTextLists = document.querySelectorAll(".product_price");
             const productAmountTextLists = document.querySelectorAll(".product_amount");
             var totalPrice = 0;
